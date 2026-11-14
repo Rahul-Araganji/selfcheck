@@ -45,9 +45,9 @@ python score.py                                                      # after lab
 source ~/selfcheck-env/bin/activate && pip install flask
 python app.py        # then open http://localhost:5000 on the Pi, or http://<pi-ip>:5000 from a laptop
 ```
-Game-style screens: welcome with XP, passage input with word counter, live progress while the
-model runs, one question at a time with question and quest timers, answer reveal with the
-highlighted source sentence, and a completion screen with the summary and real on-device metrics.
+Screens: home, choose a passage, reading (questions are prepared on the Pi while the student
+reads), assessment one question at a time with a session timer, evidence reveal with the
+highlighted source sentence, and results with the summary and real on-device metrics.
 The UI reuses `run_selfcheck()` unchanged; answers stay on the Pi until the student submits.
 
 ## Results (Raspberry Pi 5, 8 practice passages, same model for all three versions)

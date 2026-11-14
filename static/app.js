@@ -1,238 +1,202 @@
-// SelfCheck UI. All AI work happens in the local Flask backend on the Pi; timers run here in the browser.
+// SelfCheck front end. All AI work runs in the local Flask backend on this device (ExecuTorch).
+// Questions are generated while the student reads, so the assessment is usually ready on time.
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const words = (t) => t.trim().split(/\s+/).filter(Boolean).length;
+const fmt = (ms) => { const t = Math.floor(ms / 1000); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`; };
 
-// ---------- Saved progress (per browser; the app works without it) ----------
-const store = {
-  get(k, d) { try { const v = localStorage.getItem("selfcheck." + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
-  set(k, v) { try { localStorage.setItem("selfcheck." + k, JSON.stringify(v)); } catch {} },
+// Friendly titles for the practice passages (file name -> title).
+const TITLES = {
+  sample1: "Photosynthesis", sample2: "The water cycle", sample3: "The Constitution of India",
+  sample4: "The human heart", sample5: "The Revolt of 1857", sample6: "Sound",
+  sample7: "Money and credit", sample8: "Soils of India", official: "Today's passage",
 };
-let xp = store.get("xp", 0);
-const XP_PER_LEVEL = 100;
 
-function renderXP() {
-  $("lvl").textContent = Math.floor(xp / XP_PER_LEVEL) + 1;
-  $("xpnum").textContent = xp;
-  $("xpfill").style.width = ((xp % XP_PER_LEVEL) / XP_PER_LEVEL) * 100 + "%";
-  $("st-quests").textContent = store.get("quests", 0);
-  $("st-correct").textContent = store.get("correct", 0);
-}
+let job = null, questions = [], idx = 0, results = [];
+let sessionStart = 0, timerHandle = null, pollToken = 0;
 
-function addXP(amount, anchor) {
-  xp += amount;
-  store.set("xp", xp);
-  renderXP();
-  if (anchor) {
-    const r = anchor.getBoundingClientRect();
-    const pop = document.createElement("div");
-    pop.className = "xp-pop";
-    pop.textContent = `+${amount} XP`;
-    pop.style.left = r.left + r.width / 2 - 40 + "px";
-    pop.style.top = r.top - 10 + "px";
-    document.body.appendChild(pop);
-    setTimeout(() => pop.remove(), 1200);
-  }
-}
-
-// ---------- Screens ----------
+// ---------- Navigation ----------
 function show(name) {
   document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("active", s.id === "s-" + name));
   window.scrollTo(0, 0);
-  if (name === "passage") setTimeout(() => $("passage").focus(), 50);
 }
 document.addEventListener("click", (e) => {
   const go = e.target.closest("[data-go]");
   if (go) show(go.dataset.go);
 });
 
-// ---------- Passage input ----------
+// ---------- Choose a passage ----------
 async function loadSamples() {
   try {
     const list = await (await fetch("/api/samples")).json();
-    $("samples").innerHTML = list.map((s, i) => `<button class="chip" data-i="${i}">${esc(s.name)}</button>`).join("");
+    $("samples").innerHTML = list.map((s, i) => `
+      <button class="sample" data-i="${i}">
+        <b>${esc(TITLES[s.name] || s.name)}</b>
+        <span>${words(s.text)} words</span>
+      </button>`).join("");
     $("samples").onclick = (e) => {
-      const b = e.target.closest(".chip");
-      if (!b) return;
-      $("passage").value = list[b.dataset.i].text;
-      updateCount();
+      const b = e.target.closest(".sample");
+      if (b) openPassage(TITLES[list[b.dataset.i].name] || list[b.dataset.i].name, list[b.dataset.i].text);
     };
-  } catch { /* samples are optional */ }
+  } catch { /* practice passages are optional */ }
 }
 
-function updateCount() {
-  const n = $("passage").value.trim().split(/\s+/).filter(Boolean).length;
-  $("wc").textContent = n;
-  const c = $("counter");
-  c.className = "counter " + (n >= 150 && n <= 300 ? "good" : n >= 40 && n <= 600 ? "warn" : "bad");
-  $("wc-hint").textContent = n < 40 ? "(need at least 40)" : n >= 150 && n <= 300 ? "(perfect length)" : n > 600 ? "(too long)" : "(aim for 150-300)";
-  $("generate").disabled = n < 40 || n > 600;
-  $("meter-fill").style.width = Math.min(100, (n / 400) * 100) + "%";
-}
-$("passage").addEventListener("input", updateCount);
+$("paste").addEventListener("input", () => {
+  const n = words($("paste").value);
+  $("paste-count").textContent = `${n} words`;
+  $("paste-count").className = "count" + (n >= 150 && n <= 300 ? " good" : "");
+  $("use-paste").disabled = n < 40 || n > 600;
+});
+$("use-paste").addEventListener("click", () => openPassage("Your passage", $("paste").value));
 
-// ---------- Generation with live progress ----------
-let job = null, questions = [], idx = 0, results = [];
-let qStart = 0, sStart = 0, timerHandle = null;
+// ---------- Reading (generation runs in the background) ----------
+async function openPassage(title, text) {
+  $("choose-error").textContent = "";
+  $("read-title").textContent = title;
+  $("read-words").textContent = `${words(text)} words`;
+  $("read-text").innerHTML = text.trim().split(/\n\s*\n/).map((p) => `<p>${esc(p)}</p>`).join("");
+  setPrep("working", "Preparing your questions…", "Read the passage while this device writes and checks the questions.", 3);
+  $("start-assess").disabled = true;
+  show("read");
 
-$("generate").addEventListener("click", async () => {
-  $("pass-error").textContent = "";
-  $("load-error").textContent = "";
-  $("generate").disabled = true;
+  const token = ++pollToken;  // ignore progress from an earlier passage
   try {
     const res = await fetch("/api/quest", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ passage: $("passage").value }) });
+      body: JSON.stringify({ passage: text }) });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Could not start the quest.");
+    if (!res.ok) throw new Error(data.error || "Could not start.");
     job = data.job_id;
-    $("progress-fill").style.width = "4%";
-    show("loading");
-    poll();
+    poll(token);
   } catch (err) {
-    $("pass-error").textContent = err.message;
-  } finally {
-    updateCount();
+    setPrep("failed", "Couldn't prepare questions", err.message, 0);
   }
-});
+}
 
-async function poll() {
+function setPrep(state, title, detail, pct) {
+  $("prep").className = "card prep" + (state === "ready" ? " ready" : state === "failed" ? " failed" : "");
+  $("prep-title").textContent = title;
+  $("prep-detail").textContent = detail;
+  $("prep-bar").style.width = pct + "%";
+}
+
+async function poll(token) {
+  if (token !== pollToken) return;
   try {
     const s = await (await fetch(`/api/quest/${job}`)).json();
-    $("calls").textContent = s.calls;
-    $("elapsed").textContent = Math.round(s.elapsed_s);
-    $("stage").textContent = s.status === "queued" ? "Waiting for the model..." : s.calls === 0 ? "Loading the model and picking facts" : s.stage_text + "...";
-    // A typical quest uses about 7-9 model calls; the bar fills with real calls and never claims 100% early.
-    const pct = s.status === "done" ? 100 : Math.min(92, 4 + (s.calls / 8) * 88);
-    $("progress-fill").style.width = pct + "%";
-    document.querySelectorAll("#steps li").forEach((li) => {
-      const n = Number(li.dataset.s);
-      li.className = n < s.stage ? "done" : n === s.stage ? "now" : "";
-    });
-    if (s.status === "done") return startQuiz(s.questions);
-    if (s.status === "error") { $("load-error").textContent = "Something went wrong: " + s.error; return; }
+    if (s.status === "done") {
+      questions = s.questions;
+      setPrep("ready", `${questions.length} questions ready`, "Each answer was taken from the passage and checked. Start when you've finished reading.", 100);
+      $("start-assess").disabled = false;
+      return;
+    }
+    if (s.status === "error") return setPrep("failed", "Something went wrong", s.error, 0);
+    // A typical passage needs about 7-9 model calls; the bar follows real calls and never hits 100% early.
+    const pct = Math.min(92, 3 + (s.calls / 8) * 89);
+    const step = s.calls === 0 ? "Loading the model" : s.stage_text;
+    setPrep("working", "Preparing your questions…", `${step} · ${s.calls} model calls · ${Math.round(s.elapsed_s)}s`, pct);
   } catch {
-    $("stage").textContent = "Reconnecting to the Pi...";
+    $("prep-detail").textContent = "Reconnecting…";
   }
-  setTimeout(poll, 1500); // gentle on the Pi while the model is using the CPU
+  setTimeout(() => poll(token), 1500);
 }
 
-// ---------- Quiz ----------
-const fmt = (ms) => { const t = Math.floor(ms / 1000); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`; };
-
-function tick() {
-  const now = Date.now();
-  $("t-q").textContent = fmt(now - qStart);
-  $("t-s").textContent = fmt(now - sStart);
-}
-
-function startQuiz(qs) {
-  questions = qs;
+$("start-assess").addEventListener("click", () => {
   idx = 0;
   results = [];
-  sStart = Date.now();
+  sessionStart = Date.now();
   clearInterval(timerHandle);
-  timerHandle = setInterval(tick, 250);
-  show("quiz");
+  timerHandle = setInterval(() => { $("timer").textContent = fmt(Date.now() - sessionStart); }, 500);
+  $("timer").textContent = "0:00";
   showQuestion();
-}
+});
 
-function renderHearts() {
-  $("progress").innerHTML = questions.map((_, i) => {
-    const r = results[i];
-    const cls = r === true ? "right" : r === false ? "wrong" : i === idx ? "current" : "";
-    const label = r === true ? "correct" : r === false ? "missed" : i === idx ? "current" : "to do";
-    return `<span class="seg ${cls}" title="Question ${i + 1}: ${label}"></span>`;
-  }).join("");
+// ---------- Assessment ----------
+function renderSteps() {
+  $("q-steps").innerHTML = questions.map((_, i) =>
+    `<span class="step ${i < idx ? "done" : i === idx ? "now" : ""}"></span>`).join("");
 }
 
 function showQuestion() {
   const q = questions[idx];
   $("q-count").textContent = `Question ${idx + 1} of ${questions.length}`;
-  $("q-text").textContent = q.question;
-  const tag = $("q-kind");
-  tag.textContent = q.kind === "cloze" ? "FILL IN THE BLANK" : "VERIFIED QUESTION";
-  tag.className = "tag" + (q.kind === "cloze" ? " cloze" : "");
+  $("q-kind").textContent = q.kind === "cloze" ? "Fill in the blank" : "Question";
+  $("q-text").textContent = q.question.replace(/^Fill in the blank:\s*/i, "");
   $("attempt").value = "";
-  $("attempt").disabled = false;
-  $("submit").disabled = false;
-  $("answer-form").hidden = false;
-  $("reveal").hidden = true;
-  renderHearts();
-  qStart = Date.now();
-  tick();
-  $("attempt").focus();
-}
-
-function highlight(source, answer) {
-  const s = esc(source), a = esc(answer);
-  if (!a) return s;
-  const i = s.toLowerCase().indexOf(a.toLowerCase());
-  return i < 0 ? s : s.slice(0, i) + "<mark>" + s.slice(i, i + a.length) + "</mark>" + s.slice(i + a.length);
-}
-
-$("answer-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
   $("submit").disabled = true;
-  $("attempt").disabled = true;
-  const seconds = Math.round((Date.now() - qStart) / 1000);
+  renderSteps();
+  show("assess");
+  $("attempt").focus({ preventScroll: true });
+}
+
+$("attempt").addEventListener("input", () => { $("submit").disabled = !$("attempt").value.trim(); });
+$("attempt").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if ($("attempt").value.trim()) submitAnswer(); }
+});
+$("answer-form").addEventListener("submit", (e) => { e.preventDefault(); submitAnswer(); });
+$("unsure").addEventListener("click", () => { $("attempt").value = ""; submitAnswer(); });
+
+async function submitAnswer() {
+  const attempt = $("attempt").value.trim();
+  $("submit").disabled = true;
+  $("unsure").disabled = true;
   try {
     const res = await fetch(`/api/quest/${job}/answer`, { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ index: idx, attempt: $("attempt").value, seconds }) });
+      body: JSON.stringify({ index: idx, attempt, seconds: null }) });
     const r = await res.json();
     results[idx] = r.correct;
-    $("verdict").textContent = r.correct ? "Nice! You got it." : $("attempt").value.trim() ? "Not quite. Here's the answer." : "Here's the answer.";
-    $("verdict").className = "banner " + (r.correct ? "yes" : "no");
-    $("r-answer").textContent = r.answer;
-    $("r-source").innerHTML = highlight(r.source, r.answer);
-    $("answer-form").hidden = true;
-    $("reveal").hidden = false;
-    $("next").textContent = idx + 1 < questions.length ? "NEXT ▶" : "FINISH QUEST ▶";
-    renderHearts();
-    addXP(r.correct ? 25 : 5, $("verdict"));
-    $("next").focus();
-  } catch {
-    $("submit").disabled = false;
-    $("attempt").disabled = false;
+    showReveal(attempt, r);
+  } finally {
+    $("unsure").disabled = false;
   }
-});
+}
+
+// ---------- Evidence reveal ----------
+function highlight(source, answer) {
+  const s = esc(source), a = esc(answer);
+  const i = a ? s.toLowerCase().indexOf(a.toLowerCase()) : -1;
+  return i < 0 ? s : `${s.slice(0, i)}<mark>${s.slice(i, i + a.length)}</mark>${s.slice(i + a.length)}`;
+}
+
+function showReveal(attempt, r) {
+  const v = $("verdict");
+  v.className = "verdict card " + (r.correct ? "right" : "wrong");
+  $("verdict-icon").textContent = r.correct ? "✓" : attempt ? "✕" : "?";
+  $("reveal-title").textContent = r.correct ? "Correct" : attempt ? "Not quite" : "Here's the answer";
+  $("r-yours").textContent = attempt || "No answer given";
+  $("r-yours").className = "answer-text" + (attempt ? "" : " empty");
+  $("r-correct").textContent = r.answer;
+  $("r-source").innerHTML = highlight(r.source, r.answer);
+  $("next").textContent = idx + 1 < questions.length ? "Next question →" : "See results →";
+  show("reveal");
+  $("next").focus({ preventScroll: true });  // keep the verdict at the top in view
+}
 
 $("next").addEventListener("click", () => {
   idx += 1;
   if (idx < questions.length) showQuestion();
-  else finishQuest();
+  else finish();
 });
 
-// ---------- Quest complete ----------
-const METRIC_LABELS = [
-  ["total_run_s", "Quest built in", (v) => v + " s"],
-  ["mean_decode_tok_per_s", "Writing speed", (v) => v + " tok/s"],
-  ["peak_rss_mb", "Peak memory", (v) => (v / 1024).toFixed(1) + " GB"],
-  ["model_mb", "Model size", (v) => (v / 1024).toFixed(2) + " GB"],
-  ["llm_calls", "Model calls", (v) => v],
-  ["cloze_fallbacks", "Fill-in-the-blank used", (v) => v],
-  ["passage_words", "Passage length", (v) => v + " words"],
-  ["model_file", "Model file", (v) => String(v).replace(".pte", "")],
+// ---------- Results ----------
+const METRICS = [
+  ["total_run_s", "to prepare", (v) => `${v} s`],
+  ["mean_decode_tok_per_s", "writing speed", (v) => `${v} tok/s`],
+  ["peak_rss_mb", "peak memory", (v) => `${(v / 1024).toFixed(1)} GB`],
+  ["model_mb", "model size", (v) => `${(v / 1024).toFixed(2)} GB`],
+  ["llm_calls", "model calls", (v) => v],
 ];
 
-async function finishQuest() {
+async function finish() {
   clearInterval(timerHandle);
-  const total = Date.now() - sStart;
+  const total = Date.now() - sessionStart;
   const d = await (await fetch(`/api/quest/${job}/finish`)).json();
-  $("d-score").textContent = `${d.correct}/${d.total}`;
+  $("d-score").textContent = `${d.correct} of ${d.total}`;
   $("d-time").textContent = fmt(total);
-  $("d-summary").textContent = d.summary || "(No summary was produced.)";
-  $("d-metrics").innerHTML = METRIC_LABELS.filter(([k]) => d.metrics[k] !== undefined && d.metrics[k] !== null)
-    .map(([k, label, f]) => `<div class="metric"><b>${esc(f(d.metrics[k]))}</b><span>${label}</span></div>`).join("");
-  const bonus = 20;
-  const earned = results.reduce((s, r) => s + (r ? 25 : 5), 0) + bonus;
-  $("d-xp").textContent = "+" + earned;
-  store.set("quests", store.get("quests", 0) + 1);
-  store.set("correct", store.get("correct", 0) + d.correct);
+  $("d-summary").textContent = d.summary || "No summary was produced.";
+  $("d-metrics").innerHTML = METRICS.filter(([k]) => d.metrics[k] != null)
+    .map(([k, label, f]) => `<div class="metric"><b>${esc(f(d.metrics[k]))}</b><span>${label}</span></div>`).join("")
+    + `<div class="metric"><b>Llama 3.2 1B</b><span>ExecuTorch &middot; on-device</span></div>`;
   show("done");
-  addXP(bonus, $("d-xp"));
 }
 
-// ---------- Start ----------
-paintArt();
-renderXP();
 loadSamples();
-updateCount();

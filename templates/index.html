@@ -4,148 +4,155 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SelfCheck</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=3">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="art" data-art="book" data-px="3"></span><span>SELFCHECK</span></div>
-    <div class="xp" title="Experience points: earn them by answering questions">
-      <span class="lvl">LV <b id="lvl">1</b></span>
-      <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
-      <span class="xptext"><b id="xpnum">0</b> XP</span>
-    </div>
+    <button class="logo" data-go="home" aria-label="SelfCheck home">
+      <span class="logo-mark" aria-hidden="true">&#10003;</span>SelfCheck
+    </button>
+    <div class="status"><span class="dot" aria-hidden="true"></span>Offline &middot; running on this device</div>
   </header>
 
   <main>
-    <!-- 1. Welcome -->
-    <section id="s-welcome" class="screen active">
-      <div class="card hero">
-        <div class="hero-art">
-          <span class="art" data-art="owl" data-px="10"></span>
-        </div>
-        <div class="hero-text">
-          <p class="eyebrow">Offline study buddy &middot; runs on this Raspberry Pi</p>
-          <h1>Don't just read it.<br><span class="hl">Check you understood it.</span></h1>
-          <p class="lead">Paste a textbook passage. Hoot turns it into a short quest of questions, and
-             every answer comes with the exact sentence it came from.</p>
-          <button class="btn btn-grass big" data-go="passage">&#9654; START A QUEST</button>
-        </div>
+    <!-- HOME -->
+    <section id="s-home" class="screen active" aria-labelledby="home-title">
+      <div class="hero card yellow">
+        <p class="kicker">Evidence-first learning</p>
+        <h1 id="home-title">Learn with confidence.</h1>
+        <p class="sub">Know what you've understood.</p>
+        <button class="btn btn-black btn-xl" data-go="choose">Start learning &rarr;</button>
       </div>
 
-      <h2 class="section-title">How Hoot builds a quest you can trust</h2>
-      <div class="how">
-        <div class="card step"><span class="num">1</span><h3>Pick a fact</h3><p>Plain code picks an answer straight from your passage, so it can't be made up.</p></div>
-        <div class="card step"><span class="num">2</span><h3>Ask about it</h3><p>The on-device AI writes one question about that fact.</p></div>
-        <div class="card step"><span class="num">3</span><h3>Prove it</h3><p>The AI must answer its own question. If it doesn't match, the question is thrown out.</p></div>
-      </div>
+      <ol class="flow" aria-label="How SelfCheck works">
+        <li class="card"><span class="flow-n">1</span><b>Read</b><span>Read a passage from your textbook.</span></li>
+        <li class="card"><span class="flow-n">2</span><b>Think</b><span>Answer questions from memory.</span></li>
+        <li class="card"><span class="flow-n">3</span><b>Check</b><span>See the exact sentence that proves the answer.</span></li>
+        <li class="card"><span class="flow-n">4</span><b>Understand</b><span>Know what you've really learned.</span></li>
+      </ol>
 
-      <div class="stats">
-        <div class="tile"><b id="st-quests">0</b><span>quests done</span></div>
-        <div class="tile"><b id="st-correct">0</b><span>answers right</span></div>
-        <div class="tile"><b>0</b><span>internet needed</span></div>
+      <div class="card note">
+        <b>Why trust the questions?</b>
+        Every answer is taken from your passage first. Each question is then checked against
+        that sentence before you see it, and nothing leaves this device.
       </div>
     </section>
 
-    <!-- 2. Passage input -->
-    <section id="s-passage" class="screen">
+    <!-- CHOOSE A PASSAGE -->
+    <section id="s-choose" class="screen" aria-labelledby="choose-title">
+      <h2 id="choose-title" class="page-title">Choose a passage</h2>
+      <div class="samples" id="samples"></div>
+
       <div class="card">
-        <h2><span class="art" data-art="book" data-px="3"></span> Choose your passage</h2>
-        <p class="muted">Paste 150&ndash;300 words from a textbook, or try a practice passage:</p>
-        <div class="chips" id="samples"></div>
-        <textarea id="passage" rows="10" placeholder="Paste your passage here..."></textarea>
-        <div class="meter" aria-hidden="true">
-          <div class="meter-zone"></div>
-          <div class="meter-fill" id="meter-fill"></div>
-        </div>
+        <label class="label" for="paste">Or paste your own (150&ndash;300 words works best)</label>
+        <textarea id="paste" rows="7" placeholder="Paste a passage from your textbook..."></textarea>
         <div class="row">
-          <div class="counter" id="counter"><b id="wc">0</b> words <span id="wc-hint">(aim for 150&ndash;300)</span></div>
-          <div class="row tight">
-            <button class="btn btn-dirt" data-go="welcome">&#9664; BACK</button>
-            <button class="btn btn-grass" id="generate" disabled>FORGE QUEST &#9654;</button>
-          </div>
+          <span class="count" id="paste-count">0 words</span>
+          <button class="btn btn-yellow" id="use-paste" disabled>Read this passage &rarr;</button>
         </div>
-        <p class="error" id="pass-error" role="alert"></p>
+        <p class="error" id="choose-error" role="alert"></p>
       </div>
     </section>
 
-    <!-- 3. Loading -->
-    <section id="s-loading" class="screen">
-      <div class="card center">
-        <span class="art" data-art="owl" data-px="7"></span>
-        <h2>Forging your quest&hellip;</h2>
-        <p class="stage" id="stage" aria-live="polite">Waking up the model</p>
-        <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
-        <p class="muted small">Running offline on this Raspberry Pi &middot; <b id="calls">0</b> model calls &middot; <b id="elapsed">0</b>s</p>
-        <ol class="steps" id="steps">
-          <li data-s="0"><span class="dot"></span>Pick key facts from the passage</li>
-          <li data-s="1"><span class="dot"></span>Write a question for each fact</li>
-          <li data-s="2"><span class="dot"></span>Check each question by making the AI answer it</li>
-          <li data-s="3"><span class="dot"></span>Write a short summary</li>
-        </ol>
-        <p class="error" id="load-error" role="alert"></p>
+    <!-- READING -->
+    <section id="s-read" class="screen" aria-labelledby="read-title">
+      <article class="card passage">
+        <header class="passage-head">
+          <h2 id="read-title">Passage</h2>
+          <span class="tag" id="read-words">0 words</span>
+        </header>
+        <div class="passage-text" id="read-text"></div>
+      </article>
+
+      <div class="card prep" id="prep">
+        <div class="prep-text">
+          <b id="prep-title">Preparing your questions&hellip;</b>
+          <span id="prep-detail">Read the passage while this device writes and checks the questions.</span>
+        </div>
+        <div class="bar"><div class="bar-fill" id="prep-bar"></div></div>
+      </div>
+
+      <div class="row end">
+        <button class="btn btn-ghost" data-go="choose">&larr; Choose another</button>
+        <button class="btn btn-black btn-xl" id="start-assess" disabled>Start assessment &rarr;</button>
       </div>
     </section>
 
-    <!-- 4. Quiz + reveal -->
-    <section id="s-quiz" class="screen">
-      <div class="quizbar">
-        <div class="qprogress" id="progress"></div>
-        <div class="timers">
-          <div class="pill" title="Time on this question"><span class="art" data-art="clock" data-px="2"></span><b id="t-q">0:00</b></div>
-          <div class="pill" title="Total quest time"><span class="art" data-art="hourglass" data-px="2"></span><b id="t-s">0:00</b></div>
-        </div>
+    <!-- ASSESSMENT -->
+    <section id="s-assess" class="screen" aria-labelledby="q-text">
+      <div class="assess-top">
+        <div class="steps" id="q-steps" aria-hidden="true"></div>
+        <span class="tag" id="q-count">Question 1 of 3</span>
+        <span class="tag timer" title="Session time"><span class="timer-icon" aria-hidden="true"></span><span id="timer">0:00</span></span>
       </div>
-      <div class="card qcard">
-        <div class="qhead">
-          <span class="qnum" id="q-count">Question 1 of 3</span>
-          <span class="tag" id="q-kind"></span>
-        </div>
+
+      <div class="card question-card">
+        <p class="kicker" id="q-kind">Question</p>
         <h2 class="question" id="q-text"></h2>
         <form id="answer-form" autocomplete="off">
-          <input id="attempt" placeholder="Type your answer..." maxlength="200" aria-label="Your answer">
-          <button class="btn btn-grass" id="submit">SUBMIT</button>
+          <label class="label" for="attempt">Your answer</label>
+          <textarea id="attempt" rows="3" maxlength="300" placeholder="Type your answer from memory..."></textarea>
+          <div class="row end">
+            <button type="button" class="btn btn-ghost" id="unsure">I'm not sure</button>
+            <button type="submit" class="btn btn-yellow" id="submit" disabled>Submit answer</button>
+          </div>
         </form>
-        <div class="reveal" id="reveal" hidden>
-          <div class="banner" id="verdict"></div>
-          <p class="ansline">Answer: <b id="r-answer"></b></p>
-          <figure class="source">
-            <figcaption><span class="art" data-art="book" data-px="2"></span> From your passage</figcaption>
-            <blockquote id="r-source"></blockquote>
-          </figure>
-          <div class="right"><button class="btn btn-sky" id="next">NEXT &#9654;</button></div>
-        </div>
       </div>
     </section>
 
-    <!-- 5. Quest complete -->
-    <section id="s-done" class="screen">
-      <div class="card center done-head">
-        <span class="art" data-art="trophy" data-px="6"></span>
-        <h1>Quest complete!</h1>
-        <div class="results">
-          <div class="tile big-tile"><b id="d-score">0/3</b><span>correct</span></div>
-          <div class="tile big-tile"><b id="d-xp">+0</b><span>XP earned</span></div>
-          <div class="tile big-tile"><b id="d-time">0:00</b><span>quest time</span></div>
+    <!-- EVIDENCE REVEAL -->
+    <section id="s-reveal" class="screen" aria-labelledby="reveal-title">
+      <div class="verdict card" id="verdict">
+        <span class="verdict-icon" id="verdict-icon" aria-hidden="true"></span>
+        <h2 id="reveal-title">Correct</h2>
+      </div>
+
+      <div class="answers">
+        <div class="card">
+          <p class="label">Your answer</p>
+          <p class="answer-text" id="r-yours"></p>
+        </div>
+        <div class="card yellow">
+          <p class="label">Correct answer</p>
+          <p class="answer-text" id="r-correct"></p>
         </div>
       </div>
-      <div class="card">
-        <h2><span class="art" data-art="book" data-px="3"></span> Summary</h2>
-        <p id="d-summary" class="summary"></p>
-        <p class="muted small">Shown after the quiz on purpose: recall first, then review.</p>
+
+      <figure class="card evidence">
+        <figcaption class="label">Evidence from the passage</figcaption>
+        <blockquote id="r-source"></blockquote>
+      </figure>
+
+      <div class="row end">
+        <button class="btn btn-black btn-xl" id="next">Next question &rarr;</button>
       </div>
-      <div class="card">
-        <h2><span class="art" data-art="chip" data-px="3"></span> Measured on this Pi</h2>
-        <div class="metric-grid" id="d-metrics"></div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="s-done" class="screen" aria-labelledby="done-title">
+      <div class="card yellow done-head">
+        <p class="kicker">Assessment complete</p>
+        <h1 id="done-title"><span id="d-score">0 of 3</span> correct</h1>
+        <p class="sub">Time: <b id="d-time">0:00</b></p>
       </div>
-      <div class="row center-row">
-        <button class="btn btn-dirt" data-go="welcome">HOME</button>
-        <button class="btn btn-grass big" data-go="passage">NEW QUEST &#9654;</button>
+
+      <div class="card">
+        <p class="label">Summary &middot; review it now that you've tested yourself</p>
+        <p class="summary" id="d-summary"></p>
+      </div>
+
+      <div class="card">
+        <p class="label">Measured on this device</p>
+        <div class="metrics" id="d-metrics"></div>
+      </div>
+
+      <div class="row end">
+        <button class="btn btn-ghost" data-go="home">Home</button>
+        <button class="btn btn-black btn-xl" data-go="choose">Try another passage &rarr;</button>
       </div>
     </section>
   </main>
 
-  <footer class="ground"></footer>
-  <script src="{{ url_for('static', filename='art.js') }}?v=2"></script>
-  <script src="{{ url_for('static', filename='app.js') }}?v=2"></script>
+  <script src="{{ url_for('static', filename='app.js') }}?v=3"></script>
 </body>
 </html>
