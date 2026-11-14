@@ -1,0 +1,93 @@
+{
+  "run_id": "133919-selfcheck-sample7",
+  "passage": "Money makes buying and selling much easier than the barter system. In barter, goods are exchanged directly for other goods, so both people must want what the other has. This requirement is called the double coincidence of wants, and it is often hard to meet. Money removes this problem because it is accepted by everyone as a medium of exchange. In India, the Reserve Bank of India issues currency notes on behalf of the central government. Banks also play an important role. People deposit their extra money in banks, which keep it safe and may pay interest on it. Banks then use a large part of these deposits to give loans to people and businesses. Loans from banks and cooperatives are called formal sources of credit, while loans from moneylenders, traders and relatives are informal sources. Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt. For this reason, increasing access to formal credit is important for the poor.",
+  "items": [
+    {
+      "question": "What is the term for the requirement that two people must want the same thing at the same time in order to meet?",
+      "answer": "double coincidence of wants",
+      "source": "This requirement is called the double coincidence of wants, and it is often hard to meet.",
+      "kind": "model"
+    },
+    {
+      "question": "What country issues currency notes on behalf of its central government?",
+      "answer": "India",
+      "source": "In India, the Reserve Bank of India issues currency notes on behalf of the central government.",
+      "kind": "model"
+    },
+    {
+      "question": "What people do with their extra money when they have it?",
+      "answer": "deposit",
+      "source": "People deposit their extra money in banks, which keep it safe and may pay interest on it.",
+      "kind": "model"
+    }
+  ],
+  "summary": "Money makes it easier to buy and sell goods because it is accepted by everyone as a medium of exchange. In India, the Reserve Bank of India issues currency notes and banks play a key role in providing formal credit to people and businesses. Informal lenders charge high interest rates, which can trap poor borrowers in debt.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.77,
+    "llm_calls": 9,
+    "generated_tokens": 142,
+    "generation_wall_s": 28.42,
+    "mean_decode_tok_per_s": 10.52,
+    "peak_rss_mb": 2630,
+    "total_run_s": 31.96,
+    "mode": "selfcheck",
+    "passage_words": 167,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "sentence": "Loans from banks and cooperatives are called formal sources of credit, while loans from moneylenders, traders and relatives are informal sources.",
+      "answer": "formal sources of credit",
+      "raw": "What are loans from banks and cooperatives called?",
+      "answer_back": "Formal",
+      "rejected": "answer-back mismatch (model answered: Formal)",
+      "wall_s": 2.27,
+      "prompt_tokens": 146,
+      "gen_tokens": 10,
+      "tok_per_s": 11.3
+    },
+    {
+      "sentence": "This requirement is called the double coincidence of wants, and it is often hard to meet.",
+      "answer": "double coincidence of wants",
+      "raw": "What is the term for the requirement that two people must want the same thing at the same time in order to meet?",
+      "answer_back": "Double coincidence of wants",
+      "rejected": null,
+      "wall_s": 3.8,
+      "prompt_tokens": 137,
+      "gen_tokens": 24,
+      "tok_per_s": 10.65
+    },
+    {
+      "sentence": "In India, the Reserve Bank of India issues currency notes on behalf of the central government.",
+      "answer": "India",
+      "raw": "What country issues currency notes on behalf of its central government?",
+      "answer_back": "India",
+      "rejected": null,
+      "wall_s": 2.93,
+      "prompt_tokens": 134,
+      "gen_tokens": 12,
+      "tok_per_s": 10.57
+    },
+    {
+      "sentence": "People deposit their extra money in banks, which keep it safe and may pay interest on it.",
+      "answer": "deposit",
+      "raw": "What people do with their extra money when they have it?",
+      "answer_back": "They deposit",
+      "rejected": null,
+      "wall_s": 2.72,
+      "prompt_tokens": 135,
+      "gen_tokens": 12,
+      "tok_per_s": 10.53
+    },
+    {
+      "summary_call": true,
+      "wall_s": 10.2,
+      "prompt_tokens": 240,
+      "gen_tokens": 74,
+      "tok_per_s": 10.08
+    }
+  ]
+}

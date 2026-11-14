@@ -1,0 +1,82 @@
+{
+  "run_id": "133516-selfcheck-sample4",
+  "passage": "The human heart is a muscular organ about the size of a closed fist. It pumps blood through a network of vessels to every part of the body. The heart has four chambers: two upper chambers called atria and two lower chambers called ventricles. The right side of the heart receives blood that is low in oxygen and pumps it to the lungs. In the lungs, the blood releases carbon dioxide and picks up oxygen. The left side of the heart then receives this oxygen-rich blood and pumps it to the rest of the body. Because the blood passes through the heart twice in one complete cycle, this system is known as double circulation. Valves between the chambers stop blood from flowing backwards. Arteries carry blood away from the heart, while veins carry blood back to it. Tiny vessels called capillaries connect arteries and veins and allow oxygen and nutrients to pass into the body's cells. At rest, the heart of a healthy adult beats about 72 times per minute.",
+  "items": [
+    {
+      "question": "What are the two upper chambers of the heart called?",
+      "answer": "atria",
+      "source": "The heart has four chambers: two upper chambers called atria and two lower chambers called ventricles.",
+      "kind": "model"
+    },
+    {
+      "question": "What is the name of the system in the human body that involves the heart pumping blood twice in one complete cycle?",
+      "answer": "double circulation",
+      "source": "Because the blood passes through the heart twice in one complete cycle, this system is known as double circulation.",
+      "kind": "model"
+    },
+    {
+      "question": "What tiny vessels connect arteries and veins and allow oxygen and nutrients to pass into the body's cells?",
+      "answer": "capillaries",
+      "source": "Tiny vessels called capillaries connect arteries and veins and allow oxygen and nutrients to pass into the body's cells.",
+      "kind": "model"
+    }
+  ],
+  "summary": "The human heart is a muscular organ that pumps blood through a network of vessels to every part of the body. It has four chambers: two upper chambers and two lower chambers. The heart beats around 72 times per minute at rest.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.72,
+    "llm_calls": 7,
+    "generated_tokens": 121,
+    "generation_wall_s": 22.94,
+    "mean_decode_tok_per_s": 10.63,
+    "peak_rss_mb": 2630,
+    "total_run_s": 26.44,
+    "mode": "selfcheck",
+    "passage_words": 170,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "sentence": "The heart has four chambers: two upper chambers called atria and two lower chambers called ventricles.",
+      "answer": "atria",
+      "raw": "What are the two upper chambers of the heart called?",
+      "answer_back": "Atria",
+      "rejected": null,
+      "wall_s": 2.22,
+      "prompt_tokens": 138,
+      "gen_tokens": 11,
+      "tok_per_s": 11.46
+    },
+    {
+      "sentence": "Because the blood passes through the heart twice in one complete cycle, this system is known as double circulation.",
+      "answer": "double circulation",
+      "raw": "What is the name of the system in the human body that involves the heart pumping blood twice in one complete cycle?",
+      "answer_back": "Double circulation",
+      "rejected": null,
+      "wall_s": 3.67,
+      "prompt_tokens": 138,
+      "gen_tokens": 23,
+      "tok_per_s": 10.63
+    },
+    {
+      "sentence": "Tiny vessels called capillaries connect arteries and veins and allow oxygen and nutrients to pass into the body's cells.",
+      "answer": "capillaries",
+      "raw": "What tiny vessels connect arteries and veins and allow oxygen and nutrients to pass into the body's cells?",
+      "answer_back": "Capillaries",
+      "rejected": null,
+      "wall_s": 3.53,
+      "prompt_tokens": 141,
+      "gen_tokens": 20,
+      "tok_per_s": 10.48
+    },
+    {
+      "summary_call": true,
+      "wall_s": 8.62,
+      "prompt_tokens": 244,
+      "gen_tokens": 59,
+      "tok_per_s": 10.15
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "run_id": "133648-selfcheck-sample5",
+  "passage": "The Revolt of 1857 was a major uprising against the rule of the British East India Company. It began on 10 May 1857 in Meerut, when Indian soldiers, known as sepoys, rebelled against their officers. One immediate cause was the introduction of new cartridges for the Enfield rifle, which were believed to be greased with animal fat. However, there were deeper causes as well. Many farmers were burdened by heavy land taxes, and several Indian rulers had lost their kingdoms under the Doctrine of Lapse. The rebels marched to Delhi and declared Bahadur Shah Zafar, the last Mughal emperor, as their leader. The revolt soon spread to Kanpur, Lucknow, Jhansi and other places. Rani Lakshmibai of Jhansi became one of its most famous leaders. Although the British suppressed the revolt by 1858, it had lasting effects. The East India Company's rule ended, and the British Crown took direct control of India through the Government of India Act 1858.",
+  "items": [
+    {
+      "question": "Fill in the blank: The Revolt of _____ was a major uprising against the rule of the British East India Company.",
+      "answer": "1857",
+      "source": "The Revolt of 1857 was a major uprising against the rule of the British East India Company.",
+      "kind": "cloze"
+    },
+    {
+      "question": "What type of soldiers rebelled against their officers in Meerut in 1857?",
+      "answer": "sepoys",
+      "source": "It began on 10 May 1857 in Meerut, when Indian soldiers, known as sepoys, rebelled against their officers.",
+      "kind": "model"
+    },
+    {
+      "question": "What year did the British Crown take direct control of India?",
+      "answer": "1858",
+      "source": "The East India Company's rule ended, and the British Crown took direct control of India through the Government of India Act 1858.",
+      "kind": "model"
+    }
+  ],
+  "summary": "The Revolt of 1857 was a major uprising against the British East India Company. The revolt began in Meerut in May 1857 due to the introduction of new cartridges for the Enfield rifle, which were greased with animal fat. The revolt spread to several places, including Kanpur, Lucknow, and Jhansi, and was led by Rani Lakshmibai",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.74,
+    "llm_calls": 15,
+    "generated_tokens": 275,
+    "generation_wall_s": 51.16,
+    "mean_decode_tok_per_s": 10.43,
+    "peak_rss_mb": 2630,
+    "total_run_s": 54.68,
+    "mode": "selfcheck",
+    "passage_words": 158,
+    "questions": 3,
+    "cloze_fallbacks": 1
+  },
+  "log": [
+    {
+      "sentence": "It began on 10 May 1857 in Meerut, when Indian soldiers, known as sepoys, rebelled against their officers.",
+      "answer": "sepoys",
+      "raw": "What type of soldiers rebelled against their officers in Meerut in 1857?",
+      "answer_back": "Sepoys",
+      "rejected": null,
+      "wall_s": 2.84,
+      "prompt_tokens": 147,
+      "gen_tokens": 17,
+      "tok_per_s": 11.22
+    },
+    {
+      "sentence": "The Revolt of 1857 was a major uprising against the rule of the British East India Company.",
+      "answer": "1857",
+      "raw": "What was the name of the major uprising against the rule of the British East India Company in 1857?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 3.62,
+      "prompt_tokens": 139,
+      "gen_tokens": 22,
+      "tok_per_s": 10.72
+    },
+    {
+      "sentence": "The Revolt of 1857 was a major uprising against the rule of the British East India Company.",
+      "answer": "British East India Company",
+      "raw": "What was the name of the uprising against the rule of the British East India Company?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 3.18,
+      "prompt_tokens": 140,
+      "gen_tokens": 17,
+      "tok_per_s": 10.41
+    },
+    {
+      "sentence": "The East India Company's rule ended, and the British Crown took direct control of India through the Government of India Act 1858.",
+      "answer": "1858",
+      "raw": "What year did the British Crown take direct control of India?",
+      "answer_back": "1858",
+      "rejected": null,
+      "wall_s": 2.83,
+      "prompt_tokens": 145,
+      "gen_tokens": 12,
+      "tok_per_s": 10.4
+    },
+    {
+      "sentence": "The revolt soon spread to Kanpur, Lucknow, Jhansi and other places.",
+      "answer": "Kanpur",
+      "raw": "What city was the revolt that soon spread to Kanpur, Lucknow, Jhansi and other places?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 3.62,
+      "prompt_tokens": 135,
+      "gen_tokens": 22,
+      "tok_per_s": 10.51
+    },
+    {
+      "sentence": "The revolt soon spread to Kanpur, Lucknow, Jhansi and other places.",
+      "answer": "Lucknow",
+      "raw": "What city was the revolt that soon spread to Kanpur, Lucknow, Jhansi and other places?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 3.67,
+      "prompt_tokens": 135,
+      "gen_tokens": 22,
+      "tok_per_s": 10.36
+    },
+    {
+      "sentence": "Rani Lakshmibai of Jhansi became one of its most famous leaders.",
+      "answer": "Lakshmibai",
+      "raw": "Who was one of the most famous leaders of the Indian Rebellion of 1857?",
+      "answer_back": "Rani Lakshmibai",
+      "rejected": "answer-back mismatch (model answered: Rani Lakshmibai)",
+      "wall_s": 3.23,
+      "prompt_tokens": 137,
+      "gen_tokens": 17,
+      "tok_per_s": 10.25
+    },
+    {
+      "sentence": "Rani Lakshmibai of Jhansi became one of its most famous leaders.",
+      "answer": "Jhansi",
+      "raw": "What was one of the most famous leaders of Rani Lakshmibai of Jhansi?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 3.46,
+      "prompt_tokens": 136,
+      "gen_tokens": 20,
+      "tok_per_s": 10.42
+    },
+    {
+      "sentence": "One immediate cause was the introduction of new cartridges for the Enfield rifle, which were believed to be greased with animal fat.",
+      "answer": "Enfield",
+      "raw": "What type of cartridges were introduced for the Enfield rifle?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 2.77,
+      "prompt_tokens": 143,
+      "gen_tokens": 12,
+      "tok_per_s": 10.4
+    },
+    {
+      "sentence": "Many farmers were burdened by heavy land taxes, and several Indian rulers had lost their kingdoms under the Doctrine of Lapse.",
+      "answer": "Indian",
+      "raw": "Which group of people were burdened by heavy land taxes?",
+      "answer_back": "Farmers",
+      "rejected": "answer-back mismatch (model answered: Farmers)",
+      "wall_s": 2.82,
+      "prompt_tokens": 141,
+      "gen_tokens": 12,
+      "tok_per_s": 10.39
+    },
+    {
+      "summary_call": true,
+      "wall_s": 12.11,
+      "prompt_tokens": 262,
+      "gen_tokens": 89,
+      "tok_per_s": 9.98
+    }
+  ]
+}

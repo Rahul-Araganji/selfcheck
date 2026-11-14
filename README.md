@@ -55,7 +55,7 @@ python score.py                                                      # after lab
 - Small sample, not yet human-labelled. This PoC measures question quality and speed, not
   learning gains.
 
-Example outputs are in `results_from_pi/`.
+Run outputs, the blind labelling sheet (`results/label_sheet.csv`) and its key are in `results/`.
 
 ## Files
 | File | Role |

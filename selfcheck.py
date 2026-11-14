@@ -70,13 +70,18 @@ def cloze(sentence, answer):
     return "Fill in the blank: " + blank
 
 
-def run_selfcheck(llm, passage, n_questions):
-    items, log = [], []
-    for sentence, answers in picker.pick(passage, k=max(5, n_questions + 2)):
-        if len(items) == n_questions:
+def run_selfcheck(llm, passage, n_questions, max_attempts=10):
+    """Try sentences in order of answer strength until n verified questions; fill gaps with cloze."""
+    items, failed, log = [], [], []
+    attempts = 0
+    for sentence, answers, strong in picker.pick(passage):
+        if len(items) == n_questions or attempts >= max_attempts:
             break
         made = None
         for answer in answers[:2]:  # at most two model attempts per sentence
+            if attempts >= max_attempts:
+                break
+            attempts += 1
             raw, call = llm.generate(prompts.question(sentence, answer), max_new_tokens=40)
             q = first_line(raw)
             reason = check_question(q, answer, sentence)
@@ -91,10 +96,19 @@ def run_selfcheck(llm, passage, n_questions):
             if reason is None:
                 made = {"question": q, "answer": answer, "source": sentence, "kind": "model"}
                 break
-        if made is None:
-            answer = answers[0]
-            made = {"question": cloze(sentence, answer), "answer": answer, "source": sentence, "kind": "cloze"}
-        items.append(made)
+        if made:
+            items.append(made)
+        else:
+            failed.append((sentence, answers[0], strong))
+    # Not enough verified questions: fill with fill-in-the-blank, strong answers first.
+    failed.sort(key=lambda f: not f[2])
+    for sentence, answer, _ in failed:
+        if len(items) >= n_questions:
+            break
+        items.append({"question": cloze(sentence, answer), "answer": answer, "source": sentence, "kind": "cloze"})
+    # Keep passage order so the quiz follows the text.
+    order = {s: i for i, s in enumerate(picker.sentences(passage))}
+    items.sort(key=lambda it: order.get(it["source"], 0))
     summary, call = llm.generate(prompts.summary(passage), max_new_tokens=90)
     summary = strip_preamble(summary)
     log.append({"summary_call": True, **call})

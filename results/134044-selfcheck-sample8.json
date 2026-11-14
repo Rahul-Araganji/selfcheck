@@ -1,0 +1,137 @@
+{
+  "run_id": "134044-selfcheck-sample8",
+  "passage": "Soil is formed very slowly from rocks over thousands of years. Changes in temperature, the action of running water and wind, and the activity of living organisms gradually break rocks into smaller particles. This process is called weathering. India has several major types of soil. Alluvial soil is the most widespread and is found mainly in the northern plains, where it is deposited by rivers such as the Ganga and the Brahmaputra. It is very fertile and good for growing rice, wheat and sugarcane. Black soil, also known as regur soil, is found in the Deccan plateau, including parts of Maharashtra and Gujarat. It holds moisture well and is ideal for growing cotton. Red soil develops on crystalline rocks in areas of low rainfall, and its red colour comes from iron. Laterite soil forms in areas with heavy rainfall and high temperature, where much of the nutrient content is washed away. Soil erosion, caused by deforestation and overgrazing, is a serious problem, and it can be reduced by planting trees and contour ploughing.",
+  "items": [
+    {
+      "question": "What region is known for its black soil?",
+      "answer": "Deccan",
+      "source": "Black soil, also known as regur soil, is found in the Deccan plateau, including parts of Maharashtra and Gujarat.",
+      "kind": "model"
+    },
+    {
+      "question": "What type of rocks develop red soil in areas with low rainfall?",
+      "answer": "crystalline",
+      "source": "Red soil develops on crystalline rocks in areas of low rainfall, and its red colour comes from iron.",
+      "kind": "model"
+    },
+    {
+      "question": "What type of soil forms in areas with heavy rainfall and high temperature?",
+      "answer": "Laterite",
+      "source": "Laterite soil forms in areas with heavy rainfall and high temperature, where much of the nutrient content is washed away.",
+      "kind": "model"
+    }
+  ],
+  "summary": "Soil is formed from rocks over thousands of years through weathering, which breaks rocks into smaller particles. Different types of soil are found in different regions, such as alluvial soil in India, black soil in the Deccan plateau, and red soil in areas with heavy rainfall. Soil erosion can be reduced by planting trees and contour ploughing.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.75,
+    "llm_calls": 14,
+    "generated_tokens": 193,
+    "generation_wall_s": 42.58,
+    "mean_decode_tok_per_s": 10.13,
+    "peak_rss_mb": 2630,
+    "total_run_s": 46.1,
+    "mode": "selfcheck",
+    "passage_words": 173,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "sentence": "Black soil, also known as regur soil, is found in the Deccan plateau, including parts of Maharashtra and Gujarat.",
+      "answer": "regur soil",
+      "raw": "What is the name of the region in India where black soil is found?",
+      "answer_back": "Deccan",
+      "rejected": "answer-back mismatch (model answered: Deccan)",
+      "wall_s": 2.79,
+      "prompt_tokens": 144,
+      "gen_tokens": 15,
+      "tok_per_s": 10.97
+    },
+    {
+      "sentence": "Black soil, also known as regur soil, is found in the Deccan plateau, including parts of Maharashtra and Gujarat.",
+      "answer": "Deccan",
+      "raw": "What region is known for its black soil?",
+      "answer_back": "Deccan",
+      "rejected": null,
+      "wall_s": 2.54,
+      "prompt_tokens": 144,
+      "gen_tokens": 9,
+      "tok_per_s": 10.24
+    },
+    {
+      "sentence": "Alluvial soil is the most widespread and is found mainly in the northern plains, where it is deposited by rivers such as the Ganga and the Brahmaputra.",
+      "answer": "Ganga",
+      "raw": "What river is the Ganga river?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 2.5,
+      "prompt_tokens": 151,
+      "gen_tokens": 8,
+      "tok_per_s": 10.1
+    },
+    {
+      "sentence": "Alluvial soil is the most widespread and is found mainly in the northern plains, where it is deposited by rivers such as the Ganga and the Brahmaputra.",
+      "answer": "Brahmaputra",
+      "raw": "What river is the Ganga and the Brahmaputra rivers?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 2.98,
+      "prompt_tokens": 152,
+      "gen_tokens": 13,
+      "tok_per_s": 10.5
+    },
+    {
+      "sentence": "India has several major types of soil.",
+      "answer": "India",
+      "raw": "What type of soil is India known for?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 2.31,
+      "prompt_tokens": 124,
+      "gen_tokens": 9,
+      "tok_per_s": 10.31
+    },
+    {
+      "sentence": "Red soil develops on crystalline rocks in areas of low rainfall, and its red colour comes from iron.",
+      "answer": "crystalline",
+      "raw": "What type of rocks develop red soil in areas with low rainfall?",
+      "answer_back": "Crystalline rocks",
+      "rejected": null,
+      "wall_s": 2.87,
+      "prompt_tokens": 138,
+      "gen_tokens": 13,
+      "tok_per_s": 10.15
+    },
+    {
+      "sentence": "Laterite soil forms in areas with heavy rainfall and high temperature, where much of the nutrient content is washed away.",
+      "answer": "nutrient",
+      "raw": "What is washed away in areas with heavy rainfall and high temperature?",
+      "answer_back": "Nutrient content",
+      "rejected": "answer-back mismatch (model answered: Nutrient content)",
+      "wall_s": 3.24,
+      "prompt_tokens": 139,
+      "gen_tokens": 13,
+      "tok_per_s": 9.12
+    },
+    {
+      "sentence": "Laterite soil forms in areas with heavy rainfall and high temperature, where much of the nutrient content is washed away.",
+      "answer": "Laterite",
+      "raw": "What type of soil forms in areas with heavy rainfall and high temperature?",
+      "answer_back": "Laterite",
+      "rejected": null,
+      "wall_s": 3.0,
+      "prompt_tokens": 140,
+      "gen_tokens": 14,
+      "tok_per_s": 10.5
+    },
+    {
+      "summary_call": true,
+      "wall_s": 11.59,
+      "prompt_tokens": 262,
+      "gen_tokens": 83,
+      "tok_per_s": 9.86
+    }
+  ]
+}

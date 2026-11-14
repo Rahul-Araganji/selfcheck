@@ -1,13 +1,7 @@
 {
-  "run_id": "124458-selfcheck-sample2",
+  "run_id": "133303-selfcheck-sample2",
   "passage": "The water cycle describes how water moves continuously between the Earth's surface and the atmosphere. Heat from the Sun causes water in oceans, rivers and lakes to change into water vapour, a process called evaporation. Plants also release water vapour through their leaves, which is known as transpiration. As the warm, moist air rises, it cools, and the water vapour turns back into tiny droplets. This change is called condensation, and the droplets gather to form clouds. When the droplets join together and become too heavy, they fall back to the ground as rain, snow or hail. This is called precipitation. Some of the water flows over the land into rivers and finally reaches the sea, while some soaks into the ground and becomes groundwater. In India, about 75 percent of the yearly rainfall comes during the southwest monsoon, between June and September. The water cycle is important because it supplies fresh water to people, animals and crops.",
   "items": [
-    {
-      "question": "Fill in the blank: The water cycle describes how water moves continuously between the _____'s surface and the atmosphere.",
-      "answer": "Earth",
-      "source": "The water cycle describes how water moves continuously between the Earth's surface and the atmosphere.",
-      "kind": "cloze"
-    },
     {
       "question": "What process causes water in oceans, rivers and lakes to change into water vapour?",
       "answer": "evaporation",
@@ -19,6 +13,12 @@
       "answer": "transpiration",
       "source": "Plants also release water vapour through their leaves, which is known as transpiration.",
       "kind": "model"
+    },
+    {
+      "question": "What is the process by which water vapor in the air changes back into liquid water, forming droplets that gather to form clouds?",
+      "answer": "condensation",
+      "source": "This change is called condensation, and the droplets gather to form clouds.",
+      "kind": "model"
     }
   ],
   "summary": "The water cycle is the continuous movement of water between the Earth's surface and atmosphere. It involves evaporation, condensation, and precipitation, where water vapour turns back into droplets and falls back to the ground as rain, snow, or hail. The water cycle is important for supplying fresh water to people, animals, and crops.",
@@ -27,49 +27,27 @@
     "model_mb": 1082,
     "model_load_s": 2.71,
     "llm_calls": 7,
-    "generated_tokens": 153,
-    "generation_wall_s": 24.92,
-    "mean_decode_tok_per_s": 11.13,
+    "generated_tokens": 143,
+    "generation_wall_s": 23.31,
+    "mean_decode_tok_per_s": 11.39,
     "peak_rss_mb": 2630,
-    "total_run_s": 28.42,
+    "total_run_s": 26.8,
     "mode": "selfcheck",
     "passage_words": 158,
     "questions": 3,
-    "cloze_fallbacks": 1
+    "cloze_fallbacks": 0
   },
   "log": [
-    {
-      "sentence": "The water cycle describes how water moves continuously between the Earth's surface and the atmosphere.",
-      "answer": "Earth",
-      "raw": "What is the process by which water moves continuously between the Earth's surface and the atmosphere?",
-      "answer_back": null,
-      "rejected": "gives away the answer",
-      "wall_s": 2.65,
-      "prompt_tokens": 133,
-      "gen_tokens": 18,
-      "tok_per_s": 11.99
-    },
-    {
-      "sentence": "The water cycle describes how water moves continuously between the Earth's surface and the atmosphere.",
-      "answer": "atmosphere",
-      "raw": "What is the term that describes the continuous movement of water between the Earth's surface and the atmosphere?",
-      "answer_back": null,
-      "rejected": "gives away the answer",
-      "wall_s": 2.92,
-      "prompt_tokens": 133,
-      "gen_tokens": 20,
-      "tok_per_s": 11.58
-    },
     {
       "sentence": "Heat from the Sun causes water in oceans, rivers and lakes to change into water vapour, a process called evaporation.",
       "answer": "evaporation",
       "raw": "What process causes water in oceans, rivers and lakes to change into water vapour?",
       "answer_back": "Evaporation",
       "rejected": null,
-      "wall_s": 2.96,
+      "wall_s": 2.63,
       "prompt_tokens": 142,
       "gen_tokens": 17,
-      "tok_per_s": 11.05
+      "tok_per_s": 12.07
     },
     {
       "sentence": "Plants also release water vapour through their leaves, which is known as transpiration.",
@@ -77,17 +55,28 @@
       "raw": "What process is it that plants release water vapour through their leaves?",
       "answer_back": "Transpiration",
       "rejected": null,
-      "wall_s": 2.75,
+      "wall_s": 2.51,
       "prompt_tokens": 134,
       "gen_tokens": 14,
-      "tok_per_s": 10.92
+      "tok_per_s": 11.28
+    },
+    {
+      "sentence": "This change is called condensation, and the droplets gather to form clouds.",
+      "answer": "condensation",
+      "raw": "What is the process by which water vapor in the air changes back into liquid water, forming droplets that gather to form clouds?",
+      "answer_back": "Condensation",
+      "rejected": null,
+      "wall_s": 3.71,
+      "prompt_tokens": 133,
+      "gen_tokens": 26,
+      "tok_per_s": 11.08
     },
     {
       "summary_call": true,
-      "wall_s": 10.67,
+      "wall_s": 10.28,
       "prompt_tokens": 242,
       "gen_tokens": 80,
-      "tok_per_s": 10.05
+      "tok_per_s": 10.58
     }
   ]
 }

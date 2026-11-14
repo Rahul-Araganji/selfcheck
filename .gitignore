@@ -2,6 +2,5 @@ models/
 *.pte
 __pycache__/
 *.pyc
-results/
 run_*.txt
 *.log

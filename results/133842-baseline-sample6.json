@@ -1,0 +1,49 @@
+{
+  "run_id": "133842-baseline-sample6",
+  "passage": "Sound is a form of energy that travels as a wave. It is produced when an object vibrates, causing the particles of the surrounding medium to vibrate as well. Sound needs a medium such as a solid, liquid or gas to travel, which is why it cannot travel through a vacuum. The speed of sound depends on the medium. In air at room temperature, sound travels at about 343 metres per second, but it travels faster in water and even faster in solids such as steel. The number of vibrations per second is called the frequency, and it is measured in hertz. Frequency decides the pitch of a sound: a high frequency gives a high pitch, while a low frequency gives a low pitch. The loudness of a sound depends on its amplitude, which is the size of the vibration. Humans can usually hear sounds with frequencies between 20 hertz and 20,000 hertz. Sounds above this range are called ultrasound, and they are used in medical scans.",
+  "items": [
+    {
+      "question": "What is the speed of sound in air at room temperature?",
+      "answer": "343 metres per second",
+      "source": "",
+      "kind": "baseline"
+    },
+    {
+      "question": "What determines the pitch of a sound?",
+      "answer": "The frequency of the sound",
+      "source": "",
+      "kind": "baseline"
+    },
+    {
+      "question": "What range of frequencies are considered to be above 20 hertz?",
+      "answer": "Ultrasound",
+      "source": "",
+      "kind": "baseline"
+    }
+  ],
+  "summary": "**\nSound is a form of energy that travels as a wave, and it requires a medium to travel. The speed of sound depends on the medium, and it can travel faster in solids than in liquids or gases. The frequency of sound determines its pitch, with higher frequencies producing higher pitches. The loudness of sound is also related to its amplitude, which is the size of the vibration.\n\n**Q1: What is the speed of sound in air at room temperature?**\nA1: 343 metres per second\n\n**Q2: What determines the pitch of a sound?**\nA2: The frequency of the sound\n\n**Q3: What range of frequencies are considered to be above 20 hertz?**\nA3: Ultrasound",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.75,
+    "llm_calls": 1,
+    "generated_tokens": 170,
+    "generation_wall_s": 19.99,
+    "mean_decode_tok_per_s": 9.93,
+    "peak_rss_mb": 2630,
+    "total_run_s": 23.51,
+    "mode": "baseline",
+    "passage_words": 167,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Here is a summary of the passage, followed by three quiz questions with their answers:\n\n**Summary:**\nSound is a form of energy that travels as a wave, and it requires a medium to travel. The speed of sound depends on the medium, and it can travel faster in solids than in liquids or gases. The frequency of sound determines its pitch, with higher frequencies producing higher pitches. The loudness of sound is also related to its amplitude, which is the size of the vibration.\n\n**Q1: What is the speed of sound in air at room temperature?**\nA1: 343 metres per second\n\n**Q2: What determines the pitch of a sound?**\nA2: The frequency of the sound\n\n**Q3: What range of frequencies are considered to be above 20 hertz?**\nA3: Ultrasound",
+      "wall_s": 19.99,
+      "prompt_tokens": 269,
+      "gen_tokens": 170,
+      "tok_per_s": 9.93
+    }
+  ]
+}

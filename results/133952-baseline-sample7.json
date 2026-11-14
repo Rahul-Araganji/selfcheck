@@ -1,0 +1,43 @@
+{
+  "run_id": "133952-baseline-sample7",
+  "passage": "Money makes buying and selling much easier than the barter system. In barter, goods are exchanged directly for other goods, so both people must want what the other has. This requirement is called the double coincidence of wants, and it is often hard to meet. Money removes this problem because it is accepted by everyone as a medium of exchange. In India, the Reserve Bank of India issues currency notes on behalf of the central government. Banks also play an important role. People deposit their extra money in banks, which keep it safe and may pay interest on it. Banks then use a large part of these deposits to give loans to people and businesses. Loans from banks and cooperatives are called formal sources of credit, while loans from moneylenders, traders and relatives are informal sources. Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt. For this reason, increasing access to formal credit is important for the poor.",
+  "items": [
+    {
+      "question": "What is the double coincidence of wants, and why is it hard to meet?",
+      "answer": "The double coincidence of wants is the requirement that both parties in a trade must want the goods being exchanged. This makes it difficult to meet the demand for goods and services, as people may not have what they want or may not be willing to trade for what they want.",
+      "source": "",
+      "kind": "baseline"
+    },
+    {
+      "question": "What are the formal sources of credit, and what are the informal sources of credit?",
+      "answer": "Formal sources of credit include loans from banks and cooperatives, while informal sources of credit include loans from moneylenders, traders,",
+      "source": "",
+      "kind": "baseline"
+    }
+  ],
+  "summary": "**\nMoney has made it easier to buy and sell goods, as it is a widely accepted medium of exchange. This is because money allows people to trade directly with each other without having to find someone who wants what they have. In India, the Reserve Bank of India issues currency notes, and banks play a crucial role in providing formal credit to the economy.\n\n**Q1: What is the double coincidence of wants, and why is it hard to meet?**\nA1: The double coincidence of wants is the requirement that both parties in a trade must want the goods being exchanged. This makes it difficult to meet the demand for goods and services, as people may not have what they want or may not be willing to trade for what they want.\n\n**Q2: What are the formal sources of credit, and what are the informal sources of credit?**\nA2: Formal sources of credit include loans from banks and cooperatives, while informal sources of credit include loans from moneylenders, traders,",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.78,
+    "llm_calls": 1,
+    "generated_tokens": 219,
+    "generation_wall_s": 25.31,
+    "mean_decode_tok_per_s": 9.69,
+    "peak_rss_mb": 2630,
+    "total_run_s": 28.88,
+    "mode": "baseline",
+    "passage_words": 167,
+    "questions": 2,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Here is a summary of the passage, followed by three quiz questions with their answers:\n\n**Summary:**\nMoney has made it easier to buy and sell goods, as it is a widely accepted medium of exchange. This is because money allows people to trade directly with each other without having to find someone who wants what they have. In India, the Reserve Bank of India issues currency notes, and banks play a crucial role in providing formal credit to the economy.\n\n**Q1: What is the double coincidence of wants, and why is it hard to meet?**\nA1: The double coincidence of wants is the requirement that both parties in a trade must want the goods being exchanged. This makes it difficult to meet the demand for goods and services, as people may not have what they want or may not be willing to trade for what they want.\n\n**Q2: What are the formal sources of credit, and what are the informal sources of credit?**\nA2: Formal sources of credit include loans from banks and cooperatives, while informal sources of credit include loans from moneylenders, traders,",
+      "wall_s": 25.31,
+      "prompt_tokens": 264,
+      "gen_tokens": 219,
+      "tok_per_s": 9.69
+    }
+  ]
+}

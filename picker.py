@@ -30,22 +30,53 @@ DEFINED = re.compile(
 )
 
 
-def candidate_answers(sentence, freq):
-    """Answer spans in priority order: defined terms, dates, numbers, names, then rare words.
+MARKER = re.compile(r"\b(?:called|known as|termed|is named)\s+(?:the |a |an )?")
+UNITS = (r"metres per second|times per minute|per cent|percent|%|hertz|km|kilometres|kg|metres|"
+         r"million|billion|crore|lakh|years?|degrees")
 
+
+def defined_terms(sentence):
+    """Full term after 'called' / 'known as', e.g. 'double coincidence of wants'.
+
+    Multi-word terms are kept only when they run up to punctuation; otherwise just the first word,
+    so 'capillaries connect arteries' becomes 'capillaries'.
+    """
+    terms = []
+    for m in MARKER.finditer(sentence):
+        rest = sentence[m.end():]
+        words = []
+        ended_by_punct = False
+        for tok in re.finditer(r"[A-Za-z][A-Za-z'-]*|[,.;:!?]", rest):
+            w = tok.group()
+            if w in ",.;:!?":
+                ended_by_punct = True
+                break
+            if w.lower() in STOP and w.lower() != "of":
+                break
+            if len(words) == 4:  # a 5th word: too long to be a term
+                break
+            words.append(w)
+        if words and words[-1].lower() == "of":
+            words.pop()
+        if words:
+            terms.append(" ".join(words) if ended_by_punct else words[0])
+    return terms
+
+
+def candidate_answers(sentence, freq):
+    """Return (answers, strong). Strong answers: defined terms, dates, numbers, names.
+
+    Weak answers (rare single words) are used only when a passage has too few strong ones.
     Words that appear 3+ times in the passage are its topic, so they make poor answers.
     """
     def topical(a):
         ws = content_words(a)
         return bool(ws) and all(freq[w] >= 3 for w in ws)
 
-    defined = [m.group(1) for m in DEFINED.finditer(sentence)]
+    defined = defined_terms(sentence)
     found = list(defined)
     found += [m.group() for m in re.finditer(rf"\b\d{{1,2}}\s(?:{MONTHS})\s\d{{4}}\b", sentence)]
-    for m in re.finditer(
-        r"\b\d[\d,.]*\s?(?:%|percent|per cent|km|kilometres|kg|metres|million|billion|crore|lakh|years?|degrees)?",
-        sentence,
-    ):
+    for m in re.finditer(rf"\b\d[\d,.]*\s?(?:{UNITS})?", sentence):
         num = m.group().strip(" ,.")
         if not any(num in f for f in found):  # skip "26" when "26 November 1949" is already there
             found.append(num)
@@ -64,25 +95,33 @@ def candidate_answers(sentence, freq):
             i = j + 1
         else:
             i += 1
-    # Last resort: rare content words, skipping adverbs and verb forms that make poor answers.
+    def dedupe(items):
+        seen, out = set(), []
+        for a in items:
+            key = a.lower()
+            # A term the sentence explicitly defines ("called X") is a good answer even if it is the topic.
+            if a and key not in seen and (a in defined or not topical(a)):
+                seen.add(key)
+                out.append(a)
+        return out
+
+    strong = dedupe(found)
+    if strong:
+        return strong, True
+    # Weak fallback: rare nouns-ish words, skipping adverbs, verb forms and vague quantity words.
+    vague = {"important", "several", "thousands", "different", "various", "major", "large", "small",
+             "great", "important", "common", "certain", "whole", "often"}
     rare = sorted(
         {w for w in WORD.findall(sentence)
-         if w.lower() not in STOP and len(w) >= 5 and not re.search(r"(ly|ing|ed|es)$", w.lower())},
+         if w.lower() not in STOP and w.lower() not in vague and len(w) >= 5
+         and not re.search(r"(ly|ing|ed|es|s)$", w.lower())},
         key=lambda w: (freq[w.lower()], -len(w)),
     )
-    found.extend(rare[:3])
-    seen, out = set(), []
-    for a in found:
-        key = a.lower()
-        # A term the sentence explicitly defines ("called X") is a good answer even if it is the topic.
-        if a and key not in seen and (a in defined or not topical(a)):
-            seen.add(key)
-            out.append(a)
-    return out
+    return dedupe(rare[:2]), False
 
 
-def pick(text, k=5):
-    """Return up to k (sentence, [answer candidates]) pairs, best sentences first."""
+def pick(text, k=8):
+    """Return up to k (sentence, [answers], strong) triples: strong-answer sentences first, best first."""
     sents = sentences(text)
     freq = Counter(content_words(text))
 
@@ -91,18 +130,16 @@ def pick(text, k=5):
         if not ws:
             return 0
         has_number = 1.5 if re.search(r"\d", s) else 0
-        defines = 2.0 if DEFINED.search(s) else 0
+        defines = 2.0 if MARKER.search(s) else 0
         return sum(freq[w] for w in ws) / len(ws) + has_number + defines
 
     ranked = sorted(sents, key=score, reverse=True)
     out, used = [], set()
     for s in ranked:
-        answers = [a for a in candidate_answers(s, freq) if a.lower() not in used]
+        answers, strong = candidate_answers(s, freq)
+        answers = [a for a in answers if a.lower() not in used]
         if answers:
-            out.append((s, answers))
+            out.append((s, answers, strong))
             used.add(answers[0].lower())
-        if len(out) == k:
-            break
-    # Keep passage order so the quiz follows the text.
-    order = {s: i for i, s in enumerate(sents)}
-    return sorted(out, key=lambda p: order[p[0]])
+    out.sort(key=lambda p: not p[2])  # stable: strong first, keeping score order
+    return out[:k]

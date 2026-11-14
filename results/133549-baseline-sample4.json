@@ -1,0 +1,49 @@
+{
+  "run_id": "133549-baseline-sample4",
+  "passage": "The human heart is a muscular organ about the size of a closed fist. It pumps blood through a network of vessels to every part of the body. The heart has four chambers: two upper chambers called atria and two lower chambers called ventricles. The right side of the heart receives blood that is low in oxygen and pumps it to the lungs. In the lungs, the blood releases carbon dioxide and picks up oxygen. The left side of the heart then receives this oxygen-rich blood and pumps it to the rest of the body. Because the blood passes through the heart twice in one complete cycle, this system is known as double circulation. Valves between the chambers stop blood from flowing backwards. Arteries carry blood away from the heart, while veins carry blood back to it. Tiny vessels called capillaries connect arteries and veins and allow oxygen and nutrients to pass into the body's cells. At rest, the heart of a healthy adult beats about 72 times per minute.",
+  "items": [
+    {
+      "question": "What is the size of the human heart?",
+      "answer": "The human heart is about the size of a closed fist.",
+      "source": "",
+      "kind": "baseline"
+    },
+    {
+      "question": "Where does the blood that is low in oxygen go after being pumped by the right side of the heart?",
+      "answer": "The blood that is low in oxygen goes to the lungs, where it releases carbon dioxide and picks up oxygen.",
+      "source": "",
+      "kind": "baseline"
+    },
+    {
+      "question": "What is the purpose of the tiny vessels called capillaries?",
+      "answer": "The purpose of the tiny vessels called capillaries is to allow oxygen and nutrients to pass",
+      "source": "",
+      "kind": "baseline"
+    }
+  ],
+  "summary": "**\nThe human heart is a muscular organ that pumps blood through a network of vessels to every part of the body. It has four chambers: atria and ventricles, and it has a double circulation system that allows it to pump blood twice in one complete cycle. The heart has valves that prevent blood from flowing backwards, and it is responsible for pumping oxygen-rich blood to the rest of the body.\n\n**Q1: What is the size of the human heart?**\nA1: The human heart is about the size of a closed fist.\n\n**Q2: Where does the blood that is low in oxygen go after being pumped by the right side of the heart?**\nA2: The blood that is low in oxygen goes to the lungs, where it releases carbon dioxide and picks up oxygen.\n\n**Q3: What is the purpose of the tiny vessels called capillaries?**\nA3: The purpose of the tiny vessels called capillaries is to allow oxygen and nutrients to pass",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.73,
+    "llm_calls": 1,
+    "generated_tokens": 219,
+    "generation_wall_s": 24.63,
+    "mean_decode_tok_per_s": 9.99,
+    "peak_rss_mb": 2630,
+    "total_run_s": 28.13,
+    "mode": "baseline",
+    "passage_words": 170,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Here is a summary of the passage, followed by three quiz questions with their answers:\n\n**Summary:**\nThe human heart is a muscular organ that pumps blood through a network of vessels to every part of the body. It has four chambers: atria and ventricles, and it has a double circulation system that allows it to pump blood twice in one complete cycle. The heart has valves that prevent blood from flowing backwards, and it is responsible for pumping oxygen-rich blood to the rest of the body.\n\n**Q1: What is the size of the human heart?**\nA1: The human heart is about the size of a closed fist.\n\n**Q2: Where does the blood that is low in oxygen go after being pumped by the right side of the heart?**\nA2: The blood that is low in oxygen goes to the lungs, where it releases carbon dioxide and picks up oxygen.\n\n**Q3: What is the purpose of the tiny vessels called capillaries?**\nA3: The purpose of the tiny vessels called capillaries is to allow oxygen and nutrients to pass",
+      "wall_s": 24.63,
+      "prompt_tokens": 268,
+      "gen_tokens": 219,
+      "tok_per_s": 9.99
+    }
+  ]
+}
