@@ -175,5 +175,11 @@ def warm_up():
 
 
 if __name__ == "__main__":
+    # Lower priority, so a browser on the same Pi stays smooth while the model uses the CPU.
+    # Generation speed is unchanged when nothing else is running.
+    try:
+        os.nice(int(os.environ.get("SELFCHECK_NICE", 10)))
+    except (AttributeError, OSError):
+        pass
     threading.Thread(target=warm_up, daemon=True).start()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), threaded=True)

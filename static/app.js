@@ -66,6 +66,7 @@ function updateCount() {
   c.className = "counter " + (n >= 150 && n <= 300 ? "good" : n >= 40 && n <= 600 ? "warn" : "bad");
   $("wc-hint").textContent = n < 40 ? "(need at least 40)" : n >= 150 && n <= 300 ? "(perfect length)" : n > 600 ? "(too long)" : "(aim for 150-300)";
   $("generate").disabled = n < 40 || n > 600;
+  $("meter-fill").style.width = Math.min(100, (n / 400) * 100) + "%";
 }
 $("passage").addEventListener("input", updateCount);
 
@@ -83,7 +84,7 @@ $("generate").addEventListener("click", async () => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Could not start the quest.");
     job = data.job_id;
-    $("blocks").innerHTML = "<i></i>".repeat(7);
+    $("progress-fill").style.width = "4%";
     show("loading");
     poll();
   } catch (err) {
@@ -99,6 +100,9 @@ async function poll() {
     $("calls").textContent = s.calls;
     $("elapsed").textContent = Math.round(s.elapsed_s);
     $("stage").textContent = s.status === "queued" ? "Waiting for the model..." : s.calls === 0 ? "Loading the model and picking facts" : s.stage_text + "...";
+    // A typical quest uses about 7-9 model calls; the bar fills with real calls and never claims 100% early.
+    const pct = s.status === "done" ? 100 : Math.min(92, 4 + (s.calls / 8) * 88);
+    $("progress-fill").style.width = pct + "%";
     document.querySelectorAll("#steps li").forEach((li) => {
       const n = Number(li.dataset.s);
       li.className = n < s.stage ? "done" : n === s.stage ? "now" : "";
@@ -108,7 +112,7 @@ async function poll() {
   } catch {
     $("stage").textContent = "Reconnecting to the Pi...";
   }
-  setTimeout(poll, 800);
+  setTimeout(poll, 1500); // gentle on the Pi while the model is using the CPU
 }
 
 // ---------- Quiz ----------
@@ -134,8 +138,9 @@ function startQuiz(qs) {
 function renderHearts() {
   $("progress").innerHTML = questions.map((_, i) => {
     const r = results[i];
-    const name = r === undefined ? "heartEmpty" : r ? "heart" : "heartBroken";
-    return `<span class="art" style="opacity:${r === undefined && i !== idx ? 0.45 : 1}">${spriteSVG(name, 3)}</span>`;
+    const cls = r === true ? "right" : r === false ? "wrong" : i === idx ? "current" : "";
+    const label = r === true ? "correct" : r === false ? "missed" : i === idx ? "current" : "to do";
+    return `<span class="seg ${cls}" title="Question ${i + 1}: ${label}"></span>`;
   }).join("");
 }
 
@@ -175,7 +180,7 @@ $("answer-form").addEventListener("submit", async (e) => {
     const r = await res.json();
     results[idx] = r.correct;
     $("verdict").textContent = r.correct ? "Nice! You got it." : $("attempt").value.trim() ? "Not quite. Here's the answer." : "Here's the answer.";
-    $("verdict").className = "verdict " + (r.correct ? "yes" : "no");
+    $("verdict").className = "banner " + (r.correct ? "yes" : "no");
     $("r-answer").textContent = r.answer;
     $("r-source").innerHTML = highlight(r.source, r.answer);
     $("answer-form").hidden = true;
@@ -198,10 +203,14 @@ $("next").addEventListener("click", () => {
 
 // ---------- Quest complete ----------
 const METRIC_LABELS = [
-  ["model_file", "Model"], ["model_mb", "Model size (MB)"], ["mean_decode_tok_per_s", "Speed (tokens/s)"],
-  ["peak_rss_mb", "Peak memory (MB)"], ["total_run_s", "Generation time (s)"], ["llm_calls", "Model calls"],
-  ["generated_tokens", "Tokens generated"], ["model_load_s", "Model load (s)"], ["passage_words", "Passage words"],
-  ["cloze_fallbacks", "Fill-in-the-blank fallbacks"],
+  ["total_run_s", "Quest built in", (v) => v + " s"],
+  ["mean_decode_tok_per_s", "Writing speed", (v) => v + " tok/s"],
+  ["peak_rss_mb", "Peak memory", (v) => (v / 1024).toFixed(1) + " GB"],
+  ["model_mb", "Model size", (v) => (v / 1024).toFixed(2) + " GB"],
+  ["llm_calls", "Model calls", (v) => v],
+  ["cloze_fallbacks", "Fill-in-the-blank used", (v) => v],
+  ["passage_words", "Passage length", (v) => v + " words"],
+  ["model_file", "Model file", (v) => String(v).replace(".pte", "")],
 ];
 
 async function finishQuest() {
@@ -212,7 +221,7 @@ async function finishQuest() {
   $("d-time").textContent = fmt(total);
   $("d-summary").textContent = d.summary || "(No summary was produced.)";
   $("d-metrics").innerHTML = METRIC_LABELS.filter(([k]) => d.metrics[k] !== undefined && d.metrics[k] !== null)
-    .map(([k, label]) => `<tr><td>${label}</td><td>${esc(d.metrics[k])}</td></tr>`).join("");
+    .map(([k, label, f]) => `<div class="metric"><b>${esc(f(d.metrics[k]))}</b><span>${label}</span></div>`).join("");
   const bonus = 20;
   const earned = results.reduce((s, r) => s + (r ? 25 : 5), 0) + bonus;
   $("d-xp").textContent = "+" + earned;
