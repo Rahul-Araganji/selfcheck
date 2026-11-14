@@ -115,8 +115,9 @@ def run_selfcheck(llm, passage, n_questions, max_attempts=10):
     return items, summary, log
 
 
-def run_baseline(llm, passage):
-    raw, call = llm.generate(prompts.baseline(passage), max_new_tokens=220)
+def run_baseline(llm, passage, careful=False):
+    prompt = prompts.careful(passage) if careful else prompts.baseline(passage)
+    raw, call = llm.generate(prompt, max_new_tokens=320 if careful else 220)
     summary = ""
     m = re.search(r"Summary:\s*(.+?)(?=\n\s*Q1|\Z)", raw, flags=re.S | re.I)
     if m:
@@ -125,9 +126,11 @@ def run_baseline(llm, passage):
     for i in range(1, 6):
         q = re.search(rf"Q{i}\s*[:.)]\s*(.+)", raw)
         a = re.search(rf"A{i}\s*[:.)]\s*(.+)", raw)
+        s = re.search(rf"S{i}\s*[:.)]\s*(.+)", raw)
         if q:
-            items.append({"question": q.group(1).strip(" *"), "answer": a.group(1).strip(" *") if a else "",
-                          "source": "", "kind": "baseline"})
+            items.append({"question": q.group(1).strip(" *"), "answer": a.group(1).strip(" *\"") if a else "",
+                          "source": s.group(1).strip(" *\"") if s else "",
+                          "kind": "careful" if careful else "baseline"})
     return items, summary, [{"raw": raw, **call}]
 
 
@@ -152,7 +155,7 @@ def show(items, summary, interactive):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("passage")
-    ap.add_argument("--mode", choices=["selfcheck", "baseline"], default="selfcheck")
+    ap.add_argument("--mode", choices=["selfcheck", "baseline", "careful"], default="selfcheck")
     ap.add_argument("--interactive", action="store_true")
     ap.add_argument("--n", type=int, default=3, help="number of questions (at least 3 for the brief)")
     ap.add_argument("--pte", default=DEFAULT_PTE)
@@ -167,7 +170,7 @@ def main():
     if args.mode == "selfcheck":
         items, summary, log = run_selfcheck(llm, passage, args.n)
     else:
-        items, summary, log = run_baseline(llm, passage)
+        items, summary, log = run_baseline(llm, passage, careful=args.mode == "careful")
     total_s = round(time.perf_counter() - t0, 2)
 
     show(items, summary, args.interactive)

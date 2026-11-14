@@ -1,5 +1,5 @@
 {
-  "run_id": "133722-baseline-sample5",
+  "run_id": "141556-baseline-sample5",
   "passage": "The Revolt of 1857 was a major uprising against the rule of the British East India Company. It began on 10 May 1857 in Meerut, when Indian soldiers, known as sepoys, rebelled against their officers. One immediate cause was the introduction of new cartridges for the Enfield rifle, which were believed to be greased with animal fat. However, there were deeper causes as well. Many farmers were burdened by heavy land taxes, and several Indian rulers had lost their kingdoms under the Doctrine of Lapse. The rebels marched to Delhi and declared Bahadur Shah Zafar, the last Mughal emperor, as their leader. The revolt soon spread to Kanpur, Lucknow, Jhansi and other places. Rani Lakshmibai of Jhansi became one of its most famous leaders. Although the British suppressed the revolt by 1858, it had lasting effects. The East India Company's rule ended, and the British Crown took direct control of India through the Government of India Act 1858.",
   "items": [
     {
@@ -22,10 +22,10 @@
     "model_load_s": 2.76,
     "llm_calls": 1,
     "generated_tokens": 219,
-    "generation_wall_s": 25.36,
-    "mean_decode_tok_per_s": 9.76,
+    "generation_wall_s": 26.14,
+    "mean_decode_tok_per_s": 9.47,
     "peak_rss_mb": 2630,
-    "total_run_s": 28.88,
+    "total_run_s": 29.67,
     "mode": "baseline",
     "passage_words": 158,
     "questions": 2,
@@ -34,10 +34,10 @@
   "log": [
     {
       "raw": "Here is a summary of the passage, followed by three quiz questions with their answers:\n\nSummary: The Revolt of 1857 was a major uprising against the rule of the British East India Company, which began in Meerut in May 1857. The revolt was sparked by the introduction of new cartridges for the Enfield rifle, which were greased with animal fat, and deeper causes such as heavy land taxes and the loss of Indian kingdoms under the Doctrine of Lapse. The revolt spread to several places, including Delhi, Kanpur, Lucknow, and Jhansi, and was led by Rani Lakshmibai of Jhansi. Although the British suppressed the revolt, it had lasting effects, including the end of the East India Company's rule and the British Crown taking direct control of India through the Government of India Act 1858.\n\nQ1: When did the Revolt of 1857 begin?\nA1: 10 May 1857\n\nQ2: What was the immediate cause of the revolt?\nA2: The introduction of new cartridges for the En",
-      "wall_s": 25.36,
+      "wall_s": 26.14,
       "prompt_tokens": 286,
       "gen_tokens": 219,
-      "tok_per_s": 9.76
+      "tok_per_s": 9.47
     }
   ]
 }

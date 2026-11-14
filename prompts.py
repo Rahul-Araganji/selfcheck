@@ -46,6 +46,20 @@ def summary(passage):
     )
 
 
+def careful(passage):
+    """The best a single prompt can do: explicit grounding rules and a quoted source."""
+    return chat(
+        "You help a Class 9 student revise. Follow these rules strictly:\n"
+        "1. Every question must be answerable using only the passage.\n"
+        "2. Copy each answer exactly from the passage, as a short phrase.\n"
+        "3. After each answer, quote the full sentence from the passage that contains it.\n"
+        "4. Cover different important ideas from the beginning, middle and end of the passage.\n"
+        "Write a short summary, then three questions. Use this format:\nSummary: ...\n"
+        "Q1: ...\nA1: ...\nS1: ...\nQ2: ...\nA2: ...\nS2: ...\nQ3: ...\nA3: ...\nS3: ...",
+        [("user", passage)],
+    )
+
+
 def baseline(passage):
     """One-prompt baseline: what most teams will do. Used for comparison only."""
     return chat(

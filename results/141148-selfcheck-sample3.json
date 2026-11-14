@@ -1,5 +1,5 @@
 {
-  "run_id": "133417-selfcheck-sample3",
+  "run_id": "141148-selfcheck-sample3",
   "passage": "The Constitution of India is the supreme law of the country. It was drafted by a Constituent Assembly, and the Drafting Committee was chaired by Dr B. R. Ambedkar. The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950, a date now celebrated every year as Republic Day. It describes the structure of the government, the powers of its different parts and the rights of citizens. The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies. It also lists Fundamental Duties that every citizen is expected to follow, such as respecting the national flag and protecting the environment. India is described in the Preamble as a sovereign, socialist, secular and democratic republic. The Constitution can be changed through amendments passed by Parliament, which allows it to adapt to the needs of a changing society.",
   "items": [
     {
@@ -25,13 +25,13 @@
   "metrics": {
     "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
     "model_mb": 1082,
-    "model_load_s": 2.83,
+    "model_load_s": 2.71,
     "llm_calls": 13,
     "generated_tokens": 192,
-    "generation_wall_s": 38.28,
-    "mean_decode_tok_per_s": 10.64,
-    "peak_rss_mb": 2629,
-    "total_run_s": 41.9,
+    "generation_wall_s": 37.14,
+    "mean_decode_tok_per_s": 10.98,
+    "peak_rss_mb": 2630,
+    "total_run_s": 40.63,
     "mode": "selfcheck",
     "passage_words": 151,
     "questions": 3,
@@ -44,10 +44,10 @@
       "raw": "When was the Constitution adopted and came into effect?",
       "answer_back": "November 26, 1949",
       "rejected": null,
-      "wall_s": 2.21,
+      "wall_s": 2.2,
       "prompt_tokens": 154,
       "gen_tokens": 10,
-      "tok_per_s": 11.59
+      "tok_per_s": 11.7
     },
     {
       "sentence": "The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies.",
@@ -55,10 +55,21 @@
       "raw": "What rights are guaranteed by the Constitution?",
       "answer_back": "The right to equality, the right to freedom, and the right to constitutional remedies",
       "rejected": "answer-back mismatch (model answered: The right to equality, the right to freedom, and the right to constitutional remedies)",
-      "wall_s": 2.26,
+      "wall_s": 2.14,
       "prompt_tokens": 141,
       "gen_tokens": 8,
-      "tok_per_s": 10.43
+      "tok_per_s": 11.11
+    },
+    {
+      "sentence": "The Constitution can be changed through amendments passed by Parliament, which allows it to adapt to the needs of a changing society.",
+      "answer": "Parliament",
+      "raw": "What institution allows the Constitution to adapt to the needs of a changing society?",
+      "answer_back": "Parliament",
+      "rejected": null,
+      "wall_s": 2.87,
+      "prompt_tokens": 140,
+      "gen_tokens": 15,
+      "tok_per_s": 10.68
     },
     {
       "sentence": "The Constitution of India is the supreme law of the country.",
@@ -69,29 +80,7 @@
       "wall_s": 2.25,
       "prompt_tokens": 128,
       "gen_tokens": 9,
-      "tok_per_s": 10.77
-    },
-    {
-      "sentence": "The Constitution can be changed through amendments passed by Parliament, which allows it to adapt to the needs of a changing society.",
-      "answer": "Parliament",
-      "raw": "What institution allows the Constitution to adapt to the needs of a changing society?",
-      "answer_back": "Parliament",
-      "rejected": null,
-      "wall_s": 2.94,
-      "prompt_tokens": 140,
-      "gen_tokens": 15,
-      "tok_per_s": 10.49
-    },
-    {
-      "sentence": "India is described in the Preamble as a sovereign, socialist, secular and democratic republic.",
-      "answer": "Preamble",
-      "raw": "What is described in the Preamble of the Indian Constitution as a sovereign, socialist, secular and democratic republic?",
-      "answer_back": null,
-      "rejected": "gives away the answer",
-      "wall_s": 3.64,
-      "prompt_tokens": 135,
-      "gen_tokens": 22,
-      "tok_per_s": 10.41
+      "tok_per_s": 10.82
     },
     {
       "sentence": "It also lists Fundamental Duties that every citizen is expected to follow, such as respecting the national flag and protecting the environment.",
@@ -99,10 +88,21 @@
       "raw": "What are the Fundamental Duties of every citizen?",
       "answer_back": null,
       "rejected": "gives away the answer",
-      "wall_s": 2.55,
+      "wall_s": 2.5,
       "prompt_tokens": 143,
       "gen_tokens": 10,
-      "tok_per_s": 10.56
+      "tok_per_s": 10.91
+    },
+    {
+      "sentence": "India is described in the Preamble as a sovereign, socialist, secular and democratic republic.",
+      "answer": "Preamble",
+      "raw": "What is described in the Preamble of the Indian Constitution as a sovereign, socialist, secular and democratic republic?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 3.51,
+      "prompt_tokens": 135,
+      "gen_tokens": 22,
+      "tok_per_s": 10.8
     },
     {
       "sentence": "It was drafted by a Constituent Assembly, and the Drafting Committee was chaired by Dr B.",
@@ -110,17 +110,17 @@
       "raw": "What body was responsible for drafting the document?",
       "answer_back": "Constituent Assembly",
       "rejected": null,
-      "wall_s": 2.38,
+      "wall_s": 2.36,
       "prompt_tokens": 138,
       "gen_tokens": 9,
-      "tok_per_s": 10.56
+      "tok_per_s": 10.73
     },
     {
       "summary_call": true,
-      "wall_s": 10.41,
+      "wall_s": 10.17,
       "prompt_tokens": 229,
       "gen_tokens": 79,
-      "tok_per_s": 10.21
+      "tok_per_s": 10.43
     }
   ]
 }

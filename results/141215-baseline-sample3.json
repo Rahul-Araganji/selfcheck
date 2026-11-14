@@ -1,5 +1,5 @@
 {
-  "run_id": "133445-baseline-sample3",
+  "run_id": "141215-baseline-sample3",
   "passage": "The Constitution of India is the supreme law of the country. It was drafted by a Constituent Assembly, and the Drafting Committee was chaired by Dr B. R. Ambedkar. The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950, a date now celebrated every year as Republic Day. It describes the structure of the government, the powers of its different parts and the rights of citizens. The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies. It also lists Fundamental Duties that every citizen is expected to follow, such as respecting the national flag and protecting the environment. India is described in the Preamble as a sovereign, socialist, secular and democratic republic. The Constitution can be changed through amendments passed by Parliament, which allows it to adapt to the needs of a changing society.",
   "items": [
     {
@@ -25,13 +25,13 @@
   "metrics": {
     "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
     "model_mb": 1082,
-    "model_load_s": 2.76,
+    "model_load_s": 2.73,
     "llm_calls": 1,
     "generated_tokens": 171,
-    "generation_wall_s": 19.48,
-    "mean_decode_tok_per_s": 10.07,
+    "generation_wall_s": 19.04,
+    "mean_decode_tok_per_s": 10.28,
     "peak_rss_mb": 2630,
-    "total_run_s": 23.02,
+    "total_run_s": 22.54,
     "mode": "baseline",
     "passage_words": 151,
     "questions": 3,
@@ -40,10 +40,10 @@
   "log": [
     {
       "raw": "Here is a summary of the passage, followed by three quiz questions with their answers:\n\nSummary: The Constitution of India is the supreme law of the country, drafted by a Constituent Assembly and chaired by Dr B. R. Ambedkar. It came into effect on 26 January 1950 and is celebrated as Republic Day every year. The Constitution guarantees Fundamental Rights and Fundamental Duties, and allows for amendments to be made through Parliament.\n\nQ1: Who chaired the Constituent Assembly that drafted the Constitution of India?\nA1: Dr B. R. Ambedkar\n\nQ2: What is the date when the Constitution came into effect?\nA2: 26 January 1950\n\nQ3: What is the purpose of the Fundamental Duties listed in the Constitution?\nA3: To respect the national flag and protect the environment.",
-      "wall_s": 19.48,
+      "wall_s": 19.04,
       "prompt_tokens": 253,
       "gen_tokens": 171,
-      "tok_per_s": 10.07
+      "tok_per_s": 10.28
     }
   ]
 }

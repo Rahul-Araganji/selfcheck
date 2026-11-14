@@ -1,0 +1,49 @@
+{
+  "run_id": "141422-careful-sample4",
+  "passage": "The human heart is a muscular organ about the size of a closed fist. It pumps blood through a network of vessels to every part of the body. The heart has four chambers: two upper chambers called atria and two lower chambers called ventricles. The right side of the heart receives blood that is low in oxygen and pumps it to the lungs. In the lungs, the blood releases carbon dioxide and picks up oxygen. The left side of the heart then receives this oxygen-rich blood and pumps it to the rest of the body. Because the blood passes through the heart twice in one complete cycle, this system is known as double circulation. Valves between the chambers stop blood from flowing backwards. Arteries carry blood away from the heart, while veins carry blood back to it. Tiny vessels called capillaries connect arteries and veins and allow oxygen and nutrients to pass into the body's cells. At rest, the heart of a healthy adult beats about 72 times per minute.",
+  "items": [
+    {
+      "question": "What is the size of the human heart?",
+      "answer": "The human heart is about the size of a closed fist.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What happens to the blood that is low in oxygen in the right side of the heart?",
+      "answer": "The right side of the heart receives blood that is low in oxygen and pumps it to the lungs.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What is the purpose of the valves between the chambers of the heart?",
+      "answer": "The valves between the chambers stop blood from flowing backwards.",
+      "source": "",
+      "kind": "careful"
+    }
+  ],
+  "summary": "The human heart is a muscular organ that pumps blood through a network of vessels to every part of the body, and it has four chambers: two atria and two ventricles.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.71,
+    "llm_calls": 1,
+    "generated_tokens": 141,
+    "generation_wall_s": 18.39,
+    "mean_decode_tok_per_s": 9.66,
+    "peak_rss_mb": 2630,
+    "total_run_s": 21.9,
+    "mode": "careful",
+    "passage_words": 170,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Summary: The human heart is a muscular organ that pumps blood through a network of vessels to every part of the body, and it has four chambers: two atria and two ventricles.\n\nQ1: What is the size of the human heart?\nA1: The human heart is about the size of a closed fist.\n\nQ2: What happens to the blood that is low in oxygen in the right side of the heart?\nA2: The right side of the heart receives blood that is low in oxygen and pumps it to the lungs.\n\nQ3: What is the purpose of the valves between the chambers of the heart?\nA3: The valves between the chambers stop blood from flowing backwards.",
+      "wall_s": 18.39,
+      "prompt_tokens": 340,
+      "gen_tokens": 141,
+      "tok_per_s": 9.66
+    }
+  ]
+}

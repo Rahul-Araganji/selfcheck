@@ -1,0 +1,49 @@
+{
+  "run_id": "140918-careful-sample1",
+  "passage": "Plants make their own food through a process called photosynthesis. This process takes place mainly in the leaves, inside tiny structures called chloroplasts. Chloroplasts contain a green pigment called chlorophyll, which absorbs energy from sunlight. During photosynthesis, plants take in carbon dioxide from the air through small pores on the leaf surface called stomata. Water is absorbed by the roots and carried up to the leaves through vessels called xylem. Using the energy from sunlight, the plant combines carbon dioxide and water to produce glucose, a simple sugar. Oxygen is released into the air as a by-product. The glucose is used by the plant for energy, and extra glucose is stored as starch. Photosynthesis is important for almost all life on Earth, because it provides food for plants and, through them, for animals. It also keeps the level of oxygen in the atmosphere steady. A single large tree can release enough oxygen in a year to support about 2 people.",
+  "items": [
+    {
+      "question": "What is the main location where plants make their own food through photosynthesis?",
+      "answer": "The main location where plants make their own food through photosynthesis is in the leaves.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What is the role of chlorophyll in the process of photosynthesis?",
+      "answer": "Chlorophyll absorbs energy from sunlight.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What is the by-product of photosynthesis that is released into the air?",
+      "answer": "Oxygen is released into the air as a by-product.",
+      "source": "",
+      "kind": "careful"
+    }
+  ],
+  "summary": "Plants make their own food through a process called photosynthesis, which takes place mainly in the leaves and involves chloroplasts, chlorophyll, stomata, xylem, and glucose production.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.7,
+    "llm_calls": 1,
+    "generated_tokens": 142,
+    "generation_wall_s": 15.88,
+    "mean_decode_tok_per_s": 11.1,
+    "peak_rss_mb": 2630,
+    "total_run_s": 19.33,
+    "mode": "careful",
+    "passage_words": 160,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Summary:\nPlants make their own food through a process called photosynthesis, which takes place mainly in the leaves and involves chloroplasts, chlorophyll, stomata, xylem, and glucose production.\n\nQ1: What is the main location where plants make their own food through photosynthesis?\nA1: The main location where plants make their own food through photosynthesis is in the leaves.\n\nQ2: What is the role of chlorophyll in the process of photosynthesis?\nA2: Chlorophyll absorbs energy from sunlight.\n\nQ3: What is the by-product of photosynthesis that is released into the air?\nA3: Oxygen is released into the air as a by-product.",
+      "wall_s": 15.88,
+      "prompt_tokens": 338,
+      "gen_tokens": 142,
+      "tok_per_s": 11.1
+    }
+  ]
+}

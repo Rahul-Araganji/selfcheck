@@ -3,8 +3,9 @@
 Writes:
   results/label_sheet.csv  questions from both versions, shuffled, version hidden
   results/label_key.csv    which version made each question (don't show labellers)
-Labellers fill the 'good' column with yes or no:
-  yes = the question can be answered from the passage AND the given answer is correct.
+Labellers fill two columns with yes or no:
+  good      = the question can be answered from the passage AND the given answer is correct.
+  important = the question tests a key idea of the passage, not a minor detail.
 """
 import csv
 import glob
@@ -31,9 +32,9 @@ rows.sort(key=lambda r: r["passage"])  # group by passage so labellers read each
 
 with open("results/label_sheet.csv", "w", newline="", encoding="utf-8-sig") as f:
     w = csv.writer(f)
-    w.writerow(["id", "passage", "question", "given_answer", "good (yes/no)", "note"])
+    w.writerow(["id", "passage", "question", "given_answer", "good (yes/no)", "important (yes/no)", "note"])
     for i, r in enumerate(rows, 1):
-        w.writerow([i, r["passage"], r["question"], r["given_answer"], "", ""])
+        w.writerow([i, r["passage"], r["question"], r["given_answer"], "", "", ""])
 
 with open("results/label_key.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)

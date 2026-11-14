@@ -1,5 +1,5 @@
 {
-  "run_id": "133232-baseline-sample1",
+  "run_id": "140854-baseline-sample1",
   "passage": "Plants make their own food through a process called photosynthesis. This process takes place mainly in the leaves, inside tiny structures called chloroplasts. Chloroplasts contain a green pigment called chlorophyll, which absorbs energy from sunlight. During photosynthesis, plants take in carbon dioxide from the air through small pores on the leaf surface called stomata. Water is absorbed by the roots and carried up to the leaves through vessels called xylem. Using the energy from sunlight, the plant combines carbon dioxide and water to produce glucose, a simple sugar. Oxygen is released into the air as a by-product. The glucose is used by the plant for energy, and extra glucose is stored as starch. Photosynthesis is important for almost all life on Earth, because it provides food for plants and, through them, for animals. It also keeps the level of oxygen in the atmosphere steady. A single large tree can release enough oxygen in a year to support about 2 people.",
   "items": [
     {
@@ -25,13 +25,13 @@
   "metrics": {
     "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
     "model_mb": 1082,
-    "model_load_s": 2.74,
+    "model_load_s": 2.7,
     "llm_calls": 1,
     "generated_tokens": 152,
-    "generation_wall_s": 16.21,
-    "mean_decode_tok_per_s": 10.98,
+    "generation_wall_s": 16.02,
+    "mean_decode_tok_per_s": 11.16,
     "peak_rss_mb": 2630,
-    "total_run_s": 19.72,
+    "total_run_s": 19.47,
     "mode": "baseline",
     "passage_words": 160,
     "questions": 3,
@@ -40,10 +40,10 @@
   "log": [
     {
       "raw": "Here is a summary of the passage, followed by three quiz questions with their answers:\n\nSummary: Plants make their own food through a process called photosynthesis, which takes place mainly in the leaves and involves the use of chlorophyll, a green pigment that absorbs energy from sunlight. This process allows plants to produce glucose, a simple sugar, and oxygen, which is released into the air as a by-product.\n\nQ1: What is the main location where plants make their own food through photosynthesis?\nA1: The leaves.\n\nQ2: What is the green pigment that absorbs energy from sunlight in plants?\nA2: Chlorophyll.\n\nQ3: What is the by-product of photosynthesis that is released into the air?\nA3: Oxygen.",
-      "wall_s": 16.21,
+      "wall_s": 16.02,
       "prompt_tokens": 266,
       "gen_tokens": 152,
-      "tok_per_s": 10.98
+      "tok_per_s": 11.16
     }
   ]
 }

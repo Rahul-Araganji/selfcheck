@@ -1,5 +1,5 @@
 {
-  "run_id": "133813-selfcheck-sample6",
+  "run_id": "141720-selfcheck-sample6",
   "passage": "Sound is a form of energy that travels as a wave. It is produced when an object vibrates, causing the particles of the surrounding medium to vibrate as well. Sound needs a medium such as a solid, liquid or gas to travel, which is why it cannot travel through a vacuum. The speed of sound depends on the medium. In air at room temperature, sound travels at about 343 metres per second, but it travels faster in water and even faster in solids such as steel. The number of vibrations per second is called the frequency, and it is measured in hertz. Frequency decides the pitch of a sound: a high frequency gives a high pitch, while a low frequency gives a low pitch. The loudness of a sound depends on its amplitude, which is the size of the vibration. Humans can usually hear sounds with frequencies between 20 hertz and 20,000 hertz. Sounds above this range are called ultrasound, and they are used in medical scans.",
   "items": [
     {
@@ -25,13 +25,13 @@
   "metrics": {
     "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
     "model_mb": 1082,
-    "model_load_s": 2.75,
+    "model_load_s": 2.72,
     "llm_calls": 16,
     "generated_tokens": 183,
-    "generation_wall_s": 42.98,
-    "mean_decode_tok_per_s": 10.32,
+    "generation_wall_s": 43.28,
+    "mean_decode_tok_per_s": 10.42,
     "peak_rss_mb": 2630,
-    "total_run_s": 46.5,
+    "total_run_s": 46.77,
     "mode": "selfcheck",
     "passage_words": 167,
     "questions": 3,
@@ -44,21 +44,10 @@
       "raw": "What is the number of vibrations per second?",
       "answer_back": "Hertz",
       "rejected": "answer-back mismatch (model answered: Hertz)",
-      "wall_s": 2.05,
+      "wall_s": 2.01,
       "prompt_tokens": 135,
       "gen_tokens": 9,
-      "tok_per_s": 10.87
-    },
-    {
-      "sentence": "In air at room temperature, sound travels at about 343 metres per second, but it travels faster in water and even faster in solids such as steel.",
-      "answer": "343 metres per second",
-      "raw": "What is the speed of sound in air at room temperature?",
-      "answer_back": "343 m/s",
-      "rejected": "answer-back mismatch (model answered: 343 m/s)",
-      "wall_s": 2.76,
-      "prompt_tokens": 151,
-      "gen_tokens": 12,
-      "tok_per_s": 10.54
+      "tok_per_s": 11.39
     },
     {
       "sentence": "Sounds above this range are called ultrasound, and they are used in medical scans.",
@@ -66,10 +55,21 @@
       "raw": "What type of sound waves are used in medical scans?",
       "answer_back": "Ultrasound",
       "rejected": null,
-      "wall_s": 2.61,
+      "wall_s": 2.48,
       "prompt_tokens": 132,
       "gen_tokens": 11,
-      "tok_per_s": 10.25
+      "tok_per_s": 10.62
+    },
+    {
+      "sentence": "In air at room temperature, sound travels at about 343 metres per second, but it travels faster in water and even faster in solids such as steel.",
+      "answer": "343 metres per second",
+      "raw": "What is the speed of sound in air at room temperature?",
+      "answer_back": "343 m/s",
+      "rejected": "answer-back mismatch (model answered: 343 m/s)",
+      "wall_s": 2.98,
+      "prompt_tokens": 151,
+      "gen_tokens": 12,
+      "tok_per_s": 10.45
     },
     {
       "sentence": "Sound is a form of energy that travels as a wave.",
@@ -77,20 +77,9 @@
       "raw": "What is the form of energy that travels as a wave?",
       "answer_back": null,
       "rejected": "gives away the answer",
-      "wall_s": 2.58,
+      "wall_s": 2.59,
       "prompt_tokens": 128,
       "gen_tokens": 12,
-      "tok_per_s": 10.36
-    },
-    {
-      "sentence": "The loudness of a sound depends on its amplitude, which is the size of the vibration.",
-      "answer": "amplitude",
-      "raw": "What is the size of the vibration of a sound?",
-      "answer_back": "Amplitude",
-      "rejected": null,
-      "wall_s": 2.59,
-      "prompt_tokens": 135,
-      "gen_tokens": 11,
       "tok_per_s": 10.52
     },
     {
@@ -99,10 +88,10 @@
       "raw": "What is the medium through which sound cannot travel in a vacuum?",
       "answer_back": null,
       "rejected": "gives away the answer",
-      "wall_s": 2.89,
+      "wall_s": 2.95,
       "prompt_tokens": 141,
       "gen_tokens": 13,
-      "tok_per_s": 10.56
+      "tok_per_s": 10.28
     },
     {
       "sentence": "Sound needs a medium such as a solid, liquid or gas to travel, which is why it cannot travel through a vacuum.",
@@ -110,10 +99,21 @@
       "raw": "What medium is sound unable to travel through?",
       "answer_back": "Vacuum",
       "rejected": "answer-back mismatch (model answered: Vacuum)",
-      "wall_s": 2.5,
+      "wall_s": 2.49,
       "prompt_tokens": 141,
       "gen_tokens": 9,
-      "tok_per_s": 10.32
+      "tok_per_s": 10.44
+    },
+    {
+      "sentence": "The loudness of a sound depends on its amplitude, which is the size of the vibration.",
+      "answer": "amplitude",
+      "raw": "What is the size of the vibration of a sound?",
+      "answer_back": "Amplitude",
+      "rejected": null,
+      "wall_s": 2.68,
+      "prompt_tokens": 135,
+      "gen_tokens": 11,
+      "tok_per_s": 10.05
     },
     {
       "sentence": "It is produced when an object vibrates, causing the particles of the surrounding medium to vibrate as well.",
@@ -121,10 +121,10 @@
       "raw": "What happens when an object vibrates?",
       "answer_back": "Particles",
       "rejected": "answer-back mismatch (model answered: Particles)",
-      "wall_s": 2.39,
+      "wall_s": 2.37,
       "prompt_tokens": 139,
       "gen_tokens": 8,
-      "tok_per_s": 10.43
+      "tok_per_s": 10.2
     },
     {
       "sentence": "It is produced when an object vibrates, causing the particles of the surrounding medium to vibrate as well.",
@@ -135,14 +135,14 @@
       "wall_s": 2.8,
       "prompt_tokens": 138,
       "gen_tokens": 12,
-      "tok_per_s": 10.6
+      "tok_per_s": 9.94
     },
     {
       "summary_call": true,
-      "wall_s": 10.36,
+      "wall_s": 10.59,
       "prompt_tokens": 245,
       "gen_tokens": 74,
-      "tok_per_s": 9.97
+      "tok_per_s": 9.95
     }
   ]
 }

@@ -1,0 +1,49 @@
+{
+  "run_id": "141819-careful-sample6",
+  "passage": "Sound is a form of energy that travels as a wave. It is produced when an object vibrates, causing the particles of the surrounding medium to vibrate as well. Sound needs a medium such as a solid, liquid or gas to travel, which is why it cannot travel through a vacuum. The speed of sound depends on the medium. In air at room temperature, sound travels at about 343 metres per second, but it travels faster in water and even faster in solids such as steel. The number of vibrations per second is called the frequency, and it is measured in hertz. Frequency decides the pitch of a sound: a high frequency gives a high pitch, while a low frequency gives a low pitch. The loudness of a sound depends on its amplitude, which is the size of the vibration. Humans can usually hear sounds with frequencies between 20 hertz and 20,000 hertz. Sounds above this range are called ultrasound, and they are used in medical scans.",
+  "items": [
+    {
+      "question": "What is sound, and how is it produced?",
+      "answer": "Sound is a form of energy that travels as a wave, produced when an object vibrates, causing the particles of the surrounding medium to vibrate as well.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "Why can sound not travel through a vacuum?",
+      "answer": "Sound needs a medium such as a solid, liquid or gas to travel, which is why it cannot travel through a vacuum.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What is the relationship between frequency and pitch?",
+      "answer": "Frequency decides the pitch of a sound, with a high frequency giving a high pitch and a low frequency giving a low pitch.",
+      "source": "",
+      "kind": "careful"
+    }
+  ],
+  "summary": "Sound is a form of energy that travels as a wave, and it requires a medium to travel. The speed of sound depends on the medium, and the frequency of sound determines its pitch. The loudness of sound depends on its amplitude.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.72,
+    "llm_calls": 1,
+    "generated_tokens": 178,
+    "generation_wall_s": 22.31,
+    "mean_decode_tok_per_s": 9.58,
+    "peak_rss_mb": 2630,
+    "total_run_s": 25.8,
+    "mode": "careful",
+    "passage_words": 167,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Summary:\nSound is a form of energy that travels as a wave, and it requires a medium to travel. The speed of sound depends on the medium, and the frequency of sound determines its pitch. The loudness of sound depends on its amplitude.\n\nQ1: What is sound, and how is it produced?\nA1: Sound is a form of energy that travels as a wave, produced when an object vibrates, causing the particles of the surrounding medium to vibrate as well.\n\nQ2: Why can sound not travel through a vacuum?\nA2: Sound needs a medium such as a solid, liquid or gas to travel, which is why it cannot travel through a vacuum.\n\nQ3: What is the relationship between frequency and pitch?\nA3: Frequency decides the pitch of a sound, with a high frequency giving a high pitch and a low frequency giving a low pitch.",
+      "wall_s": 22.31,
+      "prompt_tokens": 341,
+      "gen_tokens": 178,
+      "tok_per_s": 9.58
+    }
+  ]
+}

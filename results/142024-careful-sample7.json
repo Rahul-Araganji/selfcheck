@@ -1,0 +1,49 @@
+{
+  "run_id": "142024-careful-sample7",
+  "passage": "Money makes buying and selling much easier than the barter system. In barter, goods are exchanged directly for other goods, so both people must want what the other has. This requirement is called the double coincidence of wants, and it is often hard to meet. Money removes this problem because it is accepted by everyone as a medium of exchange. In India, the Reserve Bank of India issues currency notes on behalf of the central government. Banks also play an important role. People deposit their extra money in banks, which keep it safe and may pay interest on it. Banks then use a large part of these deposits to give loans to people and businesses. Loans from banks and cooperatives are called formal sources of credit, while loans from moneylenders, traders and relatives are informal sources. Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt. For this reason, increasing access to formal credit is important for the poor.",
+  "items": [
+    {
+      "question": "Money makes buying and selling much easier than the barter system because it is accepted by everyone as a medium of exchange.",
+      "answer": "Money makes buying and selling much easier than the barter system because it is accepted by everyone as a medium of exchange.",
+      "source": "In barter, goods are exchanged directly for other goods, so both people must want what the other has. This requirement is called the double coincidence of wants, and it is often hard to meet.",
+      "kind": "careful"
+    },
+    {
+      "question": "In India, the Reserve Bank of India issues currency notes on behalf of the central government, and banks also play an important role in depositing extra money and using it to give loans to people and businesses.",
+      "answer": "In India, the Reserve Bank of India issues currency notes on behalf of the central government, and banks also play an important role in depositing extra money and using it to give loans to people and businesses.",
+      "source": "People deposit their extra money in banks, which keep it safe and may pay interest on it. Banks then use a large part of these deposits to give loans to people and businesses.",
+      "kind": "careful"
+    },
+    {
+      "question": "Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt.",
+      "answer": "Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt.",
+      "source": "",
+      "kind": "careful"
+    }
+  ],
+  "summary": "The barter system is difficult to use because both parties must want what the other has, while money makes buying and selling easier because it is accepted by everyone as a medium of exchange.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.71,
+    "llm_calls": 1,
+    "generated_tokens": 311,
+    "generation_wall_s": 37.08,
+    "mean_decode_tok_per_s": 9.31,
+    "peak_rss_mb": 2630,
+    "total_run_s": 40.57,
+    "mode": "careful",
+    "passage_words": 167,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Summary: The barter system is difficult to use because both parties must want what the other has, while money makes buying and selling easier because it is accepted by everyone as a medium of exchange.\n\nQ1: Money makes buying and selling much easier than the barter system because it is accepted by everyone as a medium of exchange.\n\nA1: Money makes buying and selling much easier than the barter system because it is accepted by everyone as a medium of exchange.\n\nS1: In barter, goods are exchanged directly for other goods, so both people must want what the other has. This requirement is called the double coincidence of wants, and it is often hard to meet.\n\nQ2: In India, the Reserve Bank of India issues currency notes on behalf of the central government, and banks also play an important role in depositing extra money and using it to give loans to people and businesses.\n\nA2: In India, the Reserve Bank of India issues currency notes on behalf of the central government, and banks also play an important role in depositing extra money and using it to give loans to people and businesses.\n\nS2: People deposit their extra money in banks, which keep it safe and may pay interest on it. Banks then use a large part of these deposits to give loans to people and businesses.\n\nQ3: Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt.\n\nA3: Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt.",
+      "wall_s": 37.08,
+      "prompt_tokens": 336,
+      "gen_tokens": 311,
+      "tok_per_s": 9.31
+    }
+  ]
+}

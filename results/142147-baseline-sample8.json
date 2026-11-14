@@ -1,5 +1,5 @@
 {
-  "run_id": "134111-baseline-sample8",
+  "run_id": "142147-baseline-sample8",
   "passage": "Soil is formed very slowly from rocks over thousands of years. Changes in temperature, the action of running water and wind, and the activity of living organisms gradually break rocks into smaller particles. This process is called weathering. India has several major types of soil. Alluvial soil is the most widespread and is found mainly in the northern plains, where it is deposited by rivers such as the Ganga and the Brahmaputra. It is very fertile and good for growing rice, wheat and sugarcane. Black soil, also known as regur soil, is found in the Deccan plateau, including parts of Maharashtra and Gujarat. It holds moisture well and is ideal for growing cotton. Red soil develops on crystalline rocks in areas of low rainfall, and its red colour comes from iron. Laterite soil forms in areas with heavy rainfall and high temperature, where much of the nutrient content is washed away. Soil erosion, caused by deforestation and overgrazing, is a serious problem, and it can be reduced by planting trees and contour ploughing.",
   "items": [
     {
@@ -25,13 +25,13 @@
   "metrics": {
     "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
     "model_mb": 1082,
-    "model_load_s": 2.73,
+    "model_load_s": 2.75,
     "llm_calls": 1,
     "generated_tokens": 153,
-    "generation_wall_s": 18.75,
-    "mean_decode_tok_per_s": 9.75,
-    "peak_rss_mb": 2631,
-    "total_run_s": 22.27,
+    "generation_wall_s": 19.08,
+    "mean_decode_tok_per_s": 9.59,
+    "peak_rss_mb": 2630,
+    "total_run_s": 22.6,
     "mode": "baseline",
     "passage_words": 173,
     "questions": 3,
@@ -40,10 +40,10 @@
   "log": [
     {
       "raw": "Here is a summary of the passage:\n\nSoil is formed slowly over thousands of years through the action of running water, wind, and living organisms, and is shaped by temperature and rainfall changes. There are different types of soil found in India, including alluvial soil, black soil, red soil, and laterite soil, each with its own unique characteristics and uses.\n\nHere are three quiz questions with their answers:\n\nQ1: What is the main process that forms soil?\nA1: Soil is formed very slowly from rocks over thousands of years.\n\nQ2: Which type of soil is ideal for growing cotton?\nA2: Black soil.\n\nQ3: What is the result of heavy rainfall and high temperature on soil?\nA3: Red soil develops.",
-      "wall_s": 18.75,
+      "wall_s": 19.08,
       "prompt_tokens": 286,
       "gen_tokens": 153,
-      "tok_per_s": 9.75
+      "tok_per_s": 9.59
     }
   ]
 }

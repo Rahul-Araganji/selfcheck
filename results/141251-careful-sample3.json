@@ -1,0 +1,49 @@
+{
+  "run_id": "141251-careful-sample3",
+  "passage": "The Constitution of India is the supreme law of the country. It was drafted by a Constituent Assembly, and the Drafting Committee was chaired by Dr B. R. Ambedkar. The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950, a date now celebrated every year as Republic Day. It describes the structure of the government, the powers of its different parts and the rights of citizens. The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies. It also lists Fundamental Duties that every citizen is expected to follow, such as respecting the national flag and protecting the environment. India is described in the Preamble as a sovereign, socialist, secular and democratic republic. The Constitution can be changed through amendments passed by Parliament, which allows it to adapt to the needs of a changing society.",
+  "items": [
+    {
+      "question": "What is the main purpose of the Constitution of India?",
+      "answer": "The main purpose of the Constitution of India is to be the supreme law of the country.",
+      "source": "The Constitution was drafted by a Constituent Assembly, and the Drafting Committee was chaired by Dr B. R. Ambedkar.",
+      "kind": "careful"
+    },
+    {
+      "question": "When was the Constitution adopted and came into effect?",
+      "answer": "The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950.",
+      "source": "The Constitution describes the structure of the government, the powers of its different parts, and the rights of citizens.",
+      "kind": "careful"
+    },
+    {
+      "question": "What are the Fundamental Rights guaranteed by the Constitution of India?",
+      "answer": "The Fundamental Rights guaranteed by the Constitution of India include the right to equality, the right to freedom, and the right to constitutional remedies.",
+      "source": "The Constitution also lists Fundamental Duties that every citizen is expected to follow, such as respecting the national flag and protecting the environment.",
+      "kind": "careful"
+    }
+  ],
+  "summary": "The Constitution of India is the supreme law of the country, drafted by a Constituent Assembly, adopted in 1949, and came into effect in 1950.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.72,
+    "llm_calls": 1,
+    "generated_tokens": 239,
+    "generation_wall_s": 27.66,
+    "mean_decode_tok_per_s": 9.8,
+    "peak_rss_mb": 2630,
+    "total_run_s": 31.14,
+    "mode": "careful",
+    "passage_words": 151,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Summary: The Constitution of India is the supreme law of the country, drafted by a Constituent Assembly, adopted in 1949, and came into effect in 1950.\n\nQ1: What is the main purpose of the Constitution of India?\n\nA1: The main purpose of the Constitution of India is to be the supreme law of the country.\n\nS1: The Constitution was drafted by a Constituent Assembly, and the Drafting Committee was chaired by Dr B. R. Ambedkar.\n\nQ2: When was the Constitution adopted and came into effect?\n\nA2: The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950.\n\nS2: The Constitution describes the structure of the government, the powers of its different parts, and the rights of citizens.\n\nQ3: What are the Fundamental Rights guaranteed by the Constitution of India?\n\nA3: The Fundamental Rights guaranteed by the Constitution of India include the right to equality, the right to freedom, and the right to constitutional remedies.\n\nS3: The Constitution also lists Fundamental Duties that every citizen is expected to follow, such as respecting the national flag and protecting the environment.",
+      "wall_s": 27.66,
+      "prompt_tokens": 325,
+      "gen_tokens": 239,
+      "tok_per_s": 9.8
+    }
+  ]
+}

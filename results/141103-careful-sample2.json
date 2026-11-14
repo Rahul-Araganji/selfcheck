@@ -1,0 +1,49 @@
+{
+  "run_id": "141103-careful-sample2",
+  "passage": "The water cycle describes how water moves continuously between the Earth's surface and the atmosphere. Heat from the Sun causes water in oceans, rivers and lakes to change into water vapour, a process called evaporation. Plants also release water vapour through their leaves, which is known as transpiration. As the warm, moist air rises, it cools, and the water vapour turns back into tiny droplets. This change is called condensation, and the droplets gather to form clouds. When the droplets join together and become too heavy, they fall back to the ground as rain, snow or hail. This is called precipitation. Some of the water flows over the land into rivers and finally reaches the sea, while some soaks into the ground and becomes groundwater. In India, about 75 percent of the yearly rainfall comes during the southwest monsoon, between June and September. The water cycle is important because it supplies fresh water to people, animals and crops.",
+  "items": [
+    {
+      "question": "What causes water in oceans, rivers, and lakes to change into water vapor?",
+      "answer": "Heat from the Sun causes water in oceans, rivers, and lakes to change into water vapor.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What is the process called when warm, moist air rises and cools, causing water vapor to turn back into tiny droplets?",
+      "answer": "As the warm, moist air rises, it cools, and the water vapor turns back into tiny droplets.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What happens when the droplets of water vapor join together and become too heavy, causing them to fall back to the ground?",
+      "answer": "When the droplets join together and become too heavy, they fall back to the ground as rain, snow, or hail.",
+      "source": "",
+      "kind": "careful"
+    }
+  ],
+  "summary": "The water cycle is the continuous movement of water between the Earth's surface and atmosphere, driven by heat from the Sun and evaporation from oceans, rivers, and lakes.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.74,
+    "llm_calls": 1,
+    "generated_tokens": 319,
+    "generation_wall_s": 34.67,
+    "mean_decode_tok_per_s": 10.09,
+    "peak_rss_mb": 2630,
+    "total_run_s": 38.18,
+    "mode": "careful",
+    "passage_words": 158,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Here is the summary, questions, and answers in the specified format:\n\nSummary: The water cycle is the continuous movement of water between the Earth's surface and atmosphere, driven by heat from the Sun and evaporation from oceans, rivers, and lakes.\n\nQ1: What causes water in oceans, rivers, and lakes to change into water vapor?\nA1: Heat from the Sun causes water in oceans, rivers, and lakes to change into water vapor.\n\nQ2: What is the process called when warm, moist air rises and cools, causing water vapor to turn back into tiny droplets?\nA2: As the warm, moist air rises, it cools, and the water vapor turns back into tiny droplets.\n\nQ3: What happens when the droplets of water vapor join together and become too heavy, causing them to fall back to the ground?\nA3: When the droplets join together and become too heavy, they fall back to the ground as rain, snow, or hail.\n\nSummary: The water cycle is the continuous movement of water between the Earth's surface and atmosphere, driven by heat from the Sun and evaporation from oceans, rivers, and lakes.\n\nQ1: What percentage of the yearly rainfall in India comes during the southwest monsoon?\nA1: About 75 percent of the yearly rainfall in India comes during the southwest monsoon, between June and September.\n\nSummary: The water cycle is the continuous movement of water between the Earth's surface and atmosphere, driven by heat from the Sun and evaporation from oceans, rivers, and lakes.\n\nQ2:",
+      "wall_s": 34.67,
+      "prompt_tokens": 338,
+      "gen_tokens": 319,
+      "tok_per_s": 10.09
+    }
+  ]
+}

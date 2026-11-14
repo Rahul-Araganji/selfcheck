@@ -1,5 +1,5 @@
 {
-  "run_id": "133919-selfcheck-sample7",
+  "run_id": "141904-selfcheck-sample7",
   "passage": "Money makes buying and selling much easier than the barter system. In barter, goods are exchanged directly for other goods, so both people must want what the other has. This requirement is called the double coincidence of wants, and it is often hard to meet. Money removes this problem because it is accepted by everyone as a medium of exchange. In India, the Reserve Bank of India issues currency notes on behalf of the central government. Banks also play an important role. People deposit their extra money in banks, which keep it safe and may pay interest on it. Banks then use a large part of these deposits to give loans to people and businesses. Loans from banks and cooperatives are called formal sources of credit, while loans from moneylenders, traders and relatives are informal sources. Informal lenders often charge much higher interest rates, which can trap poor borrowers in a cycle of debt. For this reason, increasing access to formal credit is important for the poor.",
   "items": [
     {
@@ -25,13 +25,13 @@
   "metrics": {
     "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
     "model_mb": 1082,
-    "model_load_s": 2.77,
-    "llm_calls": 9,
-    "generated_tokens": 142,
-    "generation_wall_s": 28.42,
-    "mean_decode_tok_per_s": 10.52,
+    "model_load_s": 2.71,
+    "llm_calls": 12,
+    "generated_tokens": 178,
+    "generation_wall_s": 36.87,
+    "mean_decode_tok_per_s": 10.23,
     "peak_rss_mb": 2630,
-    "total_run_s": 31.96,
+    "total_run_s": 40.35,
     "mode": "selfcheck",
     "passage_words": 167,
     "questions": 3,
@@ -39,26 +39,15 @@
   },
   "log": [
     {
-      "sentence": "Loans from banks and cooperatives are called formal sources of credit, while loans from moneylenders, traders and relatives are informal sources.",
-      "answer": "formal sources of credit",
-      "raw": "What are loans from banks and cooperatives called?",
-      "answer_back": "Formal",
-      "rejected": "answer-back mismatch (model answered: Formal)",
-      "wall_s": 2.27,
-      "prompt_tokens": 146,
-      "gen_tokens": 10,
-      "tok_per_s": 11.3
-    },
-    {
       "sentence": "This requirement is called the double coincidence of wants, and it is often hard to meet.",
       "answer": "double coincidence of wants",
       "raw": "What is the term for the requirement that two people must want the same thing at the same time in order to meet?",
       "answer_back": "Double coincidence of wants",
       "rejected": null,
-      "wall_s": 3.8,
+      "wall_s": 3.6,
       "prompt_tokens": 137,
       "gen_tokens": 24,
-      "tok_per_s": 10.65
+      "tok_per_s": 10.59
     },
     {
       "sentence": "In India, the Reserve Bank of India issues currency notes on behalf of the central government.",
@@ -66,10 +55,43 @@
       "raw": "What country issues currency notes on behalf of its central government?",
       "answer_back": "India",
       "rejected": null,
-      "wall_s": 2.93,
+      "wall_s": 2.68,
       "prompt_tokens": 134,
       "gen_tokens": 12,
-      "tok_per_s": 10.57
+      "tok_per_s": 10.52
+    },
+    {
+      "sentence": "Loans from banks and cooperatives are called formal sources of credit, while loans from moneylenders, traders and relatives are informal sources.",
+      "answer": "formal sources of credit",
+      "raw": "What are loans from banks and cooperatives called?",
+      "answer_back": "Formal",
+      "rejected": "answer-back mismatch (model answered: Formal)",
+      "wall_s": 2.67,
+      "prompt_tokens": 146,
+      "gen_tokens": 10,
+      "tok_per_s": 10.12
+    },
+    {
+      "sentence": "Money removes this problem because it is accepted by everyone as a medium of exchange.",
+      "answer": "everyone",
+      "raw": "What problem is money solving because it is widely accepted as a medium of exchange?",
+      "answer_back": "Inflation",
+      "rejected": "answer-back mismatch (model answered: Inflation)",
+      "wall_s": 3.1,
+      "prompt_tokens": 132,
+      "gen_tokens": 16,
+      "tok_per_s": 10.17
+    },
+    {
+      "sentence": "Money removes this problem because it is accepted by everyone as a medium of exchange.",
+      "answer": "exchange",
+      "raw": "What problem is money intended to solve because it is widely accepted as a medium of exchange?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 3.41,
+      "prompt_tokens": 132,
+      "gen_tokens": 18,
+      "tok_per_s": 10.08
     },
     {
       "sentence": "People deposit their extra money in banks, which keep it safe and may pay interest on it.",
@@ -77,17 +99,17 @@
       "raw": "What people do with their extra money when they have it?",
       "answer_back": "They deposit",
       "rejected": null,
-      "wall_s": 2.72,
+      "wall_s": 2.77,
       "prompt_tokens": 135,
       "gen_tokens": 12,
-      "tok_per_s": 10.53
+      "tok_per_s": 10.18
     },
     {
       "summary_call": true,
-      "wall_s": 10.2,
+      "wall_s": 10.39,
       "prompt_tokens": 240,
       "gen_tokens": 74,
-      "tok_per_s": 10.08
+      "tok_per_s": 9.84
     }
   ]
 }

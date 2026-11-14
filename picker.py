@@ -120,26 +120,66 @@ def candidate_answers(sentence, freq):
     return dedupe(rare[:2]), False
 
 
+CAUSAL = re.compile(r"\b(because|due to|causes?|caused|leads? to|results? in|as a result|therefore|"
+                    r"so that|depends on|important|used (?:to|in|for))\b", re.I)
+
+
+def importance(s, freq):
+    """How central a sentence is: shared key words, definitions, numbers, causes and effects."""
+    ws = content_words(s)
+    if not ws:
+        return 0
+    centrality = sum(freq[w] for w in ws) / len(ws)
+    return (centrality + (2.0 if MARKER.search(s) else 0) + (1.5 if re.search(r"\d", s) else 0)
+            + (1.0 if CAUSAL.search(s) else 0))
+
+
 def pick(text, k=8):
-    """Return up to k (sentence, [answers], strong) triples: strong-answer sentences first, best first."""
+    """Return up to k (sentence, [answers], strong) triples, ordered to cover the whole passage.
+
+    Sentences are grouped into the beginning, middle and end of the passage. Picks rotate between
+    the three parts, taking the most important sentence with a strong answer from each part first,
+    so a 3-question quiz covers the whole passage instead of clustering in one place.
+    """
     sents = sentences(text)
     freq = Counter(content_words(text))
-
-    def score(s):
-        ws = content_words(s)
-        if not ws:
-            return 0
-        has_number = 1.5 if re.search(r"\d", s) else 0
-        defines = 2.0 if MARKER.search(s) else 0
-        return sum(freq[w] for w in ws) / len(ws) + has_number + defines
-
-    ranked = sorted(sents, key=score, reverse=True)
-    out, used = [], set()
-    for s in ranked:
-        answers, strong = candidate_answers(s, freq)
+    n = len(sents)
+    buckets = [[], [], []]
+    used = set()
+    ranked = sorted(range(n), key=lambda i: importance(sents[i], freq), reverse=True)
+    for i in ranked:
+        answers, strong = candidate_answers(sents[i], freq)
         answers = [a for a in answers if a.lower() not in used]
         if answers:
-            out.append((s, answers, strong))
             used.add(answers[0].lower())
-    out.sort(key=lambda p: not p[2])  # stable: strong first, keeping score order
+            buckets[min(2, i * 3 // max(n, 1))].append((sents[i], answers, strong))
+    for b in buckets:
+        b.sort(key=lambda p: not p[2])  # strong answers first within each part, keeping importance order
+    out = []
+    while any(buckets) and len(out) < k:
+        for b in buckets:
+            if b:
+                out.append(b.pop(0))
+    # Weak answers go last overall, whatever their part.
+    out.sort(key=lambda p: not p[2])
     return out[:k]
+
+
+def section_of(sentence, text):
+    """0, 1 or 2: beginning, middle or end of the passage."""
+    sents = sentences(text)
+    if sentence in sents:
+        return min(2, sents.index(sentence) * 3 // max(len(sents), 1))
+    return None
+
+
+def key_terms(text, top=8):
+    """The passage's key ideas: every defined term plus the most frequent content words."""
+    freq = Counter(content_words(text))
+    terms = []
+    for s in sentences(text):
+        terms += [t.lower() for t in defined_terms(s)]
+    for w, _ in freq.most_common(top):
+        if w not in terms:
+            terms.append(w)
+    return terms

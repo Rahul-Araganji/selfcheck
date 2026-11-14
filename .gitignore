@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 run_*.txt
 *.log
+results_ui/

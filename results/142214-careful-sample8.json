@@ -1,0 +1,49 @@
+{
+  "run_id": "142214-careful-sample8",
+  "passage": "Soil is formed very slowly from rocks over thousands of years. Changes in temperature, the action of running water and wind, and the activity of living organisms gradually break rocks into smaller particles. This process is called weathering. India has several major types of soil. Alluvial soil is the most widespread and is found mainly in the northern plains, where it is deposited by rivers such as the Ganga and the Brahmaputra. It is very fertile and good for growing rice, wheat and sugarcane. Black soil, also known as regur soil, is found in the Deccan plateau, including parts of Maharashtra and Gujarat. It holds moisture well and is ideal for growing cotton. Red soil develops on crystalline rocks in areas of low rainfall, and its red colour comes from iron. Laterite soil forms in areas with heavy rainfall and high temperature, where much of the nutrient content is washed away. Soil erosion, caused by deforestation and overgrazing, is a serious problem, and it can be reduced by planting trees and contour ploughing.",
+  "items": [
+    {
+      "question": "What is the most widespread type of soil in India?",
+      "answer": "Alluvial soil is the most widespread and is found mainly in the northern plains.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What is the ideal soil for growing cotton?",
+      "answer": "Black soil is ideal for growing cotton.",
+      "source": "",
+      "kind": "careful"
+    },
+    {
+      "question": "What is the reason for soil erosion in India?",
+      "answer": "Soil erosion is caused by deforestation and overgrazing.",
+      "source": "",
+      "kind": "careful"
+    }
+  ],
+  "summary": "Soil is formed very slowly from rocks over thousands of years through the action of running water, wind, and living organisms, and is found in various types in different regions.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.71,
+    "llm_calls": 1,
+    "generated_tokens": 136,
+    "generation_wall_s": 18.45,
+    "mean_decode_tok_per_s": 9.43,
+    "peak_rss_mb": 2630,
+    "total_run_s": 21.93,
+    "mode": "careful",
+    "passage_words": 173,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Here is the summary, questions, and answers in the specified format:\n\nSummary:\nSoil is formed very slowly from rocks over thousands of years through the action of running water, wind, and living organisms, and is found in various types in different regions.\n\nQ1: What is the most widespread type of soil in India?\nA1: Alluvial soil is the most widespread and is found mainly in the northern plains.\n\nQ2: What is the ideal soil for growing cotton?\nA2: Black soil is ideal for growing cotton.\n\nQ3: What is the reason for soil erosion in India?\nA3: Soil erosion is caused by deforestation and overgrazing.",
+      "wall_s": 18.45,
+      "prompt_tokens": 358,
+      "gen_tokens": 136,
+      "tok_per_s": 9.43
+    }
+  ]
+}
