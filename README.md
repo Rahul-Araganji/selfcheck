@@ -1,4 +1,4 @@
-# SelfCheck
+# SelfCheck - Don't just read it. Check if you understood it.
 
 An offline study aid that helps Class 9-10 students check whether they understood what they read.
 It turns a 150-300 word passage into checked quiz questions and a short summary, running fully
@@ -67,6 +67,8 @@ Example outputs are in `results_from_pi/`.
 | `score.py` | Answerable-question rate from human labels |
 | `smoke_test.py` | Quick model test |
 | `passages/` | Practice passages written by the team |
+
+**SelfCheck flips the way AI-generated quizzes work: instead of generating questions and hoping their answers are correct, it selects evidence-backed answers first, generates questions around them, and verifies each question against the original passage — entirely offline on a Raspberry Pi 5.**
 
 ## Limits
 - English only; needs a student who can already read the passage.
