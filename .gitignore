@@ -5,3 +5,4 @@ __pycache__/
 run_*.txt
 *.log
 results_ui/
+passages/official.txt

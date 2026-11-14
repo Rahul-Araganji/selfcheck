@@ -193,6 +193,9 @@ async function finish() {
   $("d-score").textContent = `${d.correct} of ${d.total}`;
   $("d-time").textContent = fmt(total);
   $("d-summary").textContent = d.summary || "No summary was produced.";
+  $("d-summary-label").textContent = d.summary_source === "passage"
+    ? "Key sentences from the passage · review them now"
+    : "AI summary · every sentence checked against the passage";
   $("d-metrics").innerHTML = METRICS.filter(([k]) => d.metrics[k] != null)
     .map(([k, label, f]) => `<div class="metric"><b>${esc(f(d.metrics[k]))}</b><span>${label}</span></div>`).join("")
     + `<div class="metric"><b>Llama 3.2 1B</b><span>ExecuTorch &middot; on-device</span></div>`;

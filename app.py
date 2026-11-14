@@ -86,7 +86,9 @@ def run_job(job_id, passage, n):
                 "questions": len(items),
                 "cloze_fallbacks": sum(i["kind"] == "cloze" for i in items),
             }
-        job.update(items=items, summary=summary, metrics=metrics, status="done", stage=4)
+        summary_info = next((l.get("summary_check") for l in log if l.get("summary_call")), None) or {}
+        job.update(items=items, summary=summary, summary_source=summary_info.get("source", "checked"),
+                   metrics=metrics, status="done", stage=4)
         os.makedirs("results_ui", exist_ok=True)  # kept apart from results/ so the evaluation stays clean
         with open(f"results_ui/{job_id}.json", "w", encoding="utf-8") as f:
             json.dump({"run_id": job_id, "passage": passage, "items": items, "summary": summary,
@@ -160,7 +162,7 @@ def finish(job_id):
     job = _jobs.get(job_id) or abort(404)
     if job["status"] != "done":
         abort(409)
-    return jsonify(summary=job["summary"], metrics=job["metrics"],
+    return jsonify(summary=job["summary"], summary_source=job.get("summary_source", "checked"), metrics=job["metrics"],
                    correct=sum(1 for a in job["answers"].values() if a["correct"]),
                    answered=len(job["answers"]), total=len(job["items"]))
 

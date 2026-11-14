@@ -14,6 +14,7 @@ import time
 
 import picker
 import prompts
+import summary_check
 
 DEFAULT_PTE = "models/llama/1b/xnnpack/llama_3_2_1b_xnnpack_spinquant.pte"
 DEFAULT_TOK = "models/llama/tokenizer.json"
@@ -33,6 +34,8 @@ def check_question(q, answer, sentence):
         return "no question mark"
     if len(q.split()) < 4:
         return "too short"
+    if re.search(r"\banother\b", q, re.I):
+        return "ambiguous ('another' has more than one right answer)"
     if re.search(r"\b" + re.escape(answer.lower()) + r"\b", q.lower()):
         return "gives away the answer"
     answer_words = set(picker.content_words(answer))
@@ -109,9 +112,9 @@ def run_selfcheck(llm, passage, n_questions, max_attempts=10):
     # Keep passage order so the quiz follows the text.
     order = {s: i for i, s in enumerate(picker.sentences(passage))}
     items.sort(key=lambda it: order.get(it["source"], 0))
-    summary, call = llm.generate(prompts.summary(passage), max_new_tokens=90)
-    summary = strip_preamble(summary)
-    log.append({"summary_call": True, **call})
+    raw_summary, call = llm.generate(prompts.summary(passage), max_new_tokens=130)
+    summary, info = summary_check.checked_summary(strip_preamble(raw_summary), passage)
+    log.append({"summary_call": True, "raw_summary": raw_summary, "summary_check": info, **call})
     return items, summary, log
 
 

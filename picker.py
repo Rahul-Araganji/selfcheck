@@ -8,16 +8,21 @@ STOP = set(
     when where why how their his her they them he she we you your our us i me my do does did
     can could will would shall should may might must also than then there here into onto over
     under about after before during between through while because if each other such some any
-    all most more many much very only same both own few""".split()
+    all most more many much very only same both own few however although though therefore thus
+    hence moreover furthermore conclusion another example instance""".split()
 )
 
-WORD = re.compile(r"[A-Za-z][A-Za-z'-]*")
+# Words, without a trailing possessive: "Earth's" -> "Earth".
+WORD = re.compile(r"[A-Za-z][A-Za-z-]*(?:'(?!s\b)[A-Za-z]+)?")
 
 
-def sentences(text):
+# Split after . ! ? but not after initials or titles ("Dr B. R. Ambedkar", "Mr.", "St.").
+SENT_SPLIT = re.compile(r"(?<=[.!?])(?<![ .][A-Z]\.)(?<!Dr\.)(?<!Mr\.)(?<!Ms\.)(?<!St\.)(?<!Mrs\.)\s+(?=[A-Z0-9\"'(])")
+
+
+def sentences(text, min_words=6):
     text = re.sub(r"\s+", " ", text).strip()
-    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\"'(])", text)
-    return [p.strip() for p in parts if len(p.split()) >= 6]
+    return [p.strip() for p in SENT_SPLIT.split(text) if len(p.split()) >= min_words]
 
 
 def content_words(s):
@@ -63,6 +68,34 @@ def defined_terms(sentence):
     return terms
 
 
+CAUSE = re.compile(
+    r"\b(?:caused by|due to|results? in|leads? to|known for"
+    r"|(?:causes?|effects?|factors?|impacts?|reasons?)(?: of [a-z ]+?)? (?:is|are))\s+(?:the |a |an )?",
+    re.I,
+)
+
+
+def cause_phrases(sentence):
+    """Short phrase after 'caused by' / 'due to' / 'leads to', e.g. 'human activities'.
+
+    Kept only if it ends at punctuation or a linking word within 4 words; longer phrases are skipped
+    rather than cut, so the answer is always a complete idea.
+    """
+    out = []
+    for m in CAUSE.finditer(sentence):
+        words = []
+        for tok in re.finditer(r"[A-Za-z][A-Za-z-]*|[,.;:!?]", sentence[m.end():]):
+            w = tok.group()
+            if w in ",.;:!?" or (w.lower() in STOP and w.lower() not in ("of",)):
+                if words and words[-1].lower() != "of":
+                    out.append(" ".join(words))
+                break
+            words.append(w)
+            if len(words) > 4:
+                break
+    return out
+
+
 def candidate_answers(sentence, freq):
     """Return (answers, strong). Strong answers: defined terms, dates, numbers, names.
 
@@ -73,7 +106,7 @@ def candidate_answers(sentence, freq):
         ws = content_words(a)
         return bool(ws) and all(freq[w] >= 3 for w in ws)
 
-    defined = defined_terms(sentence)
+    defined = defined_terms(sentence) + cause_phrases(sentence)
     found = list(defined)
     found += [m.group() for m in re.finditer(rf"\b\d{{1,2}}\s(?:{MONTHS})\s\d{{4}}\b", sentence)]
     for m in re.finditer(rf"\b\d[\d,.]*\s?(?:{UNITS})?", sentence):

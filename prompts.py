@@ -40,8 +40,9 @@ def answer_back(sentence, q):
 
 def summary(passage):
     return chat(
-        "Summarise the passage for a Class 9 student in two or three short, simple sentences. "
-        "Use only facts from the passage. Output only the summary.",
+        "Summarise the passage for a Class 9 student in three short sentences. Each sentence must "
+        "restate ONE key fact from the passage, using the passage's own words. Do not combine facts "
+        "from different sentences and do not add anything new. Output only the summary.",
         [("user", passage)],
     )
 
