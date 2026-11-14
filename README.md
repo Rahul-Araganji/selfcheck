@@ -50,22 +50,32 @@ model runs, one question at a time with question and quest timers, answer reveal
 highlighted source sentence, and a completion screen with the summary and real on-device metrics.
 The UI reuses `run_selfcheck()` unchanged; answers stay on the Pi until the student submits.
 
-## Results so far (Raspberry Pi 5, 3 practice passages)
-| Measure | Result |
-|---|---|
-| Model size | 1,082 MB |
-| Decode speed | about 11 tokens/s |
-| Prompt processing | about 100-110 tokens/s |
-| Peak memory | about 2.6 GB |
-| Time per passage (3 questions + summary) | about 24-33 s |
+## Results (Raspberry Pi 5, 8 practice passages, same model for all three versions)
+Three ways of making a quiz from the same passage: a basic one-line prompt, a careful prompt with
+explicit grounding rules ("answer only from the passage, copy the answer, quote the sentence"), and
+SelfCheck. All 70 questions were shuffled and labelled blind, without knowing which version wrote them.
 
-- One-prompt baseline: 2 of 9 answers were wrong or not supported by the passage.
-- SelfCheck: no answer mismatches observed; the answer-back check caught the model inventing
-  "The Bill of Rights". 3 of 9 questions fell back to fill-in-the-blank.
-- Small sample, not yet human-labelled. This PoC measures question quality and speed, not
-  learning gains.
+| Measure | Basic prompt | Careful prompt | SelfCheck |
+|---|---|---|---|
+| Good questions (answerable from the passage, answer correct) | 12/22 (55%) | 20/24 (83%) | **22/24 (92%)** |
+| Questions or answers with a factual error | 6 | 0 | **0** |
+| Real source sentence shown | 0% | 8% | **100%** |
+| Answer copied word for word from the passage | 64% | 38% | **100%** |
+| Key terms of the passage covered | 50% | 60% | **71%** |
+| Time per passage | about 24 s | about 28 s | about 40 s |
 
-Run outputs, the blind labelling sheet (`results/label_sheet.csv`) and its key are in `results/`.
+- The careful prompt was told to quote its source but did so for 2 of 24 questions, and wrote 3
+  statements instead of questions: instructions alone don't make a small model reliable.
+- SelfCheck's 2 misses were wording problems (a question asking for two dates, and a grammatically
+  broken question), not wrong facts.
+- Limits: one labeller, about 24 questions per version. The gap to the basic prompt is large;
+  the gap to the careful prompt is 2 questions and should not be over-read.
+
+On-device: 1,082 MB model, about 11-12 tokens/s, about 2.6 GB peak memory. This PoC measures
+question quality and speed, not learning gains.
+
+Run outputs, the blind sheet (`results/label_sheet.csv`), the labelled sheet
+(`results/label_sheet_evaluated.csv`) and the key (`results/label_key.csv`) are in `results/`.
 
 ## Files
 | File | Role |
