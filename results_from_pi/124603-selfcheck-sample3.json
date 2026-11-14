@@ -1,0 +1,104 @@
+{
+  "run_id": "124603-selfcheck-sample3",
+  "passage": "The Constitution of India is the supreme law of the country. It was drafted by a Constituent Assembly, and the Drafting Committee was chaired by Dr B. R. Ambedkar. The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950, a date now celebrated every year as Republic Day. It describes the structure of the government, the powers of its different parts and the rights of citizens. The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies. It also lists Fundamental Duties that every citizen is expected to follow, such as respecting the national flag and protecting the environment. India is described in the Preamble as a sovereign, socialist, secular and democratic republic. The Constitution can be changed through amendments passed by Parliament, which allows it to adapt to the needs of a changing society.",
+  "items": [
+    {
+      "question": "Fill in the blank: The Constitution of _____ is the supreme law of the country.",
+      "answer": "India",
+      "source": "The Constitution of India is the supreme law of the country.",
+      "kind": "cloze"
+    },
+    {
+      "question": "When was the Constitution adopted and came into effect?",
+      "answer": "26 November 1949",
+      "source": "The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950, a date now celebrated every year as Republic Day.",
+      "kind": "model"
+    },
+    {
+      "question": "Fill in the blank: The Constitution guarantees _____, such as the right to equality, the right to freedom and the right to constitutional remedies.",
+      "answer": "Fundamental Rights",
+      "source": "The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies.",
+      "kind": "cloze"
+    }
+  ],
+  "summary": "The Constitution of India is the supreme law of the country and was drafted by a Constituent Assembly. It came into effect on 26 January 1950 and describes the structure of the government and the rights of citizens. The Constitution can be changed through amendments passed by Parliament, which allows it to adapt to the needs of a changing society.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.9,
+    "llm_calls": 10,
+    "generated_tokens": 153,
+    "generation_wall_s": 29.64,
+    "mean_decode_tok_per_s": 10.74,
+    "peak_rss_mb": 2631,
+    "total_run_s": 33.31,
+    "mode": "selfcheck",
+    "passage_words": 151,
+    "questions": 3,
+    "cloze_fallbacks": 2
+  },
+  "log": [
+    {
+      "sentence": "The Constitution of India is the supreme law of the country.",
+      "answer": "India",
+      "raw": "What is the supreme law of the country?",
+      "answer_back": "Constitution",
+      "rejected": "answer-back mismatch (model answered: Constitution)",
+      "wall_s": 1.87,
+      "prompt_tokens": 128,
+      "gen_tokens": 9,
+      "tok_per_s": 11.73
+    },
+    {
+      "sentence": "The Constitution of India is the supreme law of the country.",
+      "answer": "supreme",
+      "raw": "What is the supreme law of a country?",
+      "answer_back": null,
+      "rejected": "gives away the answer",
+      "wall_s": 2.14,
+      "prompt_tokens": 128,
+      "gen_tokens": 9,
+      "tok_per_s": 10.78
+    },
+    {
+      "sentence": "The Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950, a date now celebrated every year as Republic Day.",
+      "answer": "26 November 1949",
+      "raw": "When was the Constitution adopted and came into effect?",
+      "answer_back": "November 26, 1949",
+      "rejected": null,
+      "wall_s": 2.58,
+      "prompt_tokens": 154,
+      "gen_tokens": 10,
+      "tok_per_s": 10.53
+    },
+    {
+      "sentence": "The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies.",
+      "answer": "Fundamental Rights",
+      "raw": "What rights are guaranteed by the Constitution?",
+      "answer_back": "The right to equality, the right to freedom, and the right to constitutional remedies",
+      "rejected": "answer-back mismatch (model answered: The right to equality, the right to freedom, and the right to constitutional remedies)",
+      "wall_s": 2.32,
+      "prompt_tokens": 141,
+      "gen_tokens": 8,
+      "tok_per_s": 10.78
+    },
+    {
+      "sentence": "The Constitution guarantees Fundamental Rights, such as the right to equality, the right to freedom and the right to constitutional remedies.",
+      "answer": "constitutional",
+      "raw": "What guarantees Fundamental Rights in the United States Constitution?",
+      "answer_back": "The Bill of Rights",
+      "rejected": "answer-back mismatch (model answered: The Bill of Rights)",
+      "wall_s": 2.52,
+      "prompt_tokens": 140,
+      "gen_tokens": 10,
+      "tok_per_s": 10.86
+    },
+    {
+      "summary_call": true,
+      "wall_s": 10.34,
+      "prompt_tokens": 229,
+      "gen_tokens": 79,
+      "tok_per_s": 10.2
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "run_id": "124525-baseline-sample2",
+  "passage": "The water cycle describes how water moves continuously between the Earth's surface and the atmosphere. Heat from the Sun causes water in oceans, rivers and lakes to change into water vapour, a process called evaporation. Plants also release water vapour through their leaves, which is known as transpiration. As the warm, moist air rises, it cools, and the water vapour turns back into tiny droplets. This change is called condensation, and the droplets gather to form clouds. When the droplets join together and become too heavy, they fall back to the ground as rain, snow or hail. This is called precipitation. Some of the water flows over the land into rivers and finally reaches the sea, while some soaks into the ground and becomes groundwater. In India, about 75 percent of the yearly rainfall comes during the southwest monsoon, between June and September. The water cycle is important because it supplies fresh water to people, animals and crops.",
+  "items": [
+    {
+      "question": "What is the process called when water in oceans, rivers, and lakes turns back into tiny droplets and forms clouds?",
+      "answer": "Condensation",
+      "source": "",
+      "kind": "baseline"
+    },
+    {
+      "question": "What percentage of the yearly rainfall in India comes during the southwest monsoon, between June and September?",
+      "answer": "75%",
+      "source": "",
+      "kind": "baseline"
+    },
+    {
+      "question": "What happens to the water that flows over the land into rivers and finally reaches the sea?",
+      "answer": "It becomes groundwater.",
+      "source": "",
+      "kind": "baseline"
+    }
+  ],
+  "summary": "**\nThe water cycle is the continuous movement of water between the Earth's surface and the atmosphere. It involves evaporation, condensation, and precipitation, and is essential for supplying fresh water to people, animals, and crops.\n\n**Q1: What is the process called when water in oceans, rivers, and lakes turns back into tiny droplets and forms clouds?**\nA1: Condensation\n\n**Q2: What percentage of the yearly rainfall in India comes during the southwest monsoon, between June and September?**\nA2: 75%\n\n**Q3: What happens to the water that flows over the land into rivers and finally reaches the sea?**\nA3: It becomes groundwater.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.74,
+    "llm_calls": 1,
+    "generated_tokens": 161,
+    "generation_wall_s": 18.63,
+    "mean_decode_tok_per_s": 9.95,
+    "peak_rss_mb": 2631,
+    "total_run_s": 22.14,
+    "mode": "baseline",
+    "passage_words": 158,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "raw": "Here is a summary of the passage, followed by three quiz questions with their answers:\n\n**Summary:**\nThe water cycle is the continuous movement of water between the Earth's surface and the atmosphere. It involves evaporation, condensation, and precipitation, and is essential for supplying fresh water to people, animals, and crops.\n\n**Q1: What is the process called when water in oceans, rivers, and lakes turns back into tiny droplets and forms clouds?**\nA1: Condensation\n\n**Q2: What percentage of the yearly rainfall in India comes during the southwest monsoon, between June and September?**\nA2: 75%\n\n**Q3: What happens to the water that flows over the land into rivers and finally reaches the sea?**\nA3: It becomes groundwater.",
+      "wall_s": 18.63,
+      "prompt_tokens": 266,
+      "gen_tokens": 161,
+      "tok_per_s": 9.95
+    }
+  ]
+}

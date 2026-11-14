@@ -1,0 +1,82 @@
+{
+  "run_id": "124725-selfcheck-sample1",
+  "passage": "Plants make their own food through a process called photosynthesis. This process takes place mainly in the leaves, inside tiny structures called chloroplasts. Chloroplasts contain a green pigment called chlorophyll, which absorbs energy from sunlight. During photosynthesis, plants take in carbon dioxide from the air through small pores on the leaf surface called stomata. Water is absorbed by the roots and carried up to the leaves through vessels called xylem. Using the energy from sunlight, the plant combines carbon dioxide and water to produce glucose, a simple sugar. Oxygen is released into the air as a by-product. The glucose is used by the plant for energy, and extra glucose is stored as starch. Photosynthesis is important for almost all life on Earth, because it provides food for plants and, through them, for animals. It also keeps the level of oxygen in the atmosphere steady. A single large tree can release enough oxygen in a year to support about 2 people.",
+  "items": [
+    {
+      "question": "What process is it that plants use to make their own food?",
+      "answer": "photosynthesis",
+      "source": "Plants make their own food through a process called photosynthesis.",
+      "kind": "model"
+    },
+    {
+      "question": "What tiny structures are found inside leaves and are responsible for photosynthesis?",
+      "answer": "chloroplasts",
+      "source": "This process takes place mainly in the leaves, inside tiny structures called chloroplasts.",
+      "kind": "model"
+    },
+    {
+      "question": "What green pigment is found in chloroplasts and absorbs energy from sunlight?",
+      "answer": "chlorophyll",
+      "source": "Chloroplasts contain a green pigment called chlorophyll, which absorbs energy from sunlight.",
+      "kind": "model"
+    }
+  ],
+  "summary": "Plants make their own food through a process called photosynthesis, which takes place in leaves with chloroplasts. Chloroplasts contain chlorophyll, which absorbs sunlight and helps plants use carbon dioxide and water to produce glucose. This process releases oxygen as a by-product, which is essential for life on Earth.",
+  "metrics": {
+    "model_file": "llama_3_2_1b_xnnpack_spinquant.pte",
+    "model_mb": 1082,
+    "model_load_s": 2.74,
+    "llm_calls": 7,
+    "generated_tokens": 126,
+    "generation_wall_s": 20.89,
+    "mean_decode_tok_per_s": 11.37,
+    "peak_rss_mb": 2631,
+    "total_run_s": 24.38,
+    "mode": "selfcheck",
+    "passage_words": 160,
+    "questions": 3,
+    "cloze_fallbacks": 0
+  },
+  "log": [
+    {
+      "sentence": "Plants make their own food through a process called photosynthesis.",
+      "answer": "photosynthesis",
+      "raw": "What process is it that plants use to make their own food?",
+      "answer_back": "Photosynthesis",
+      "rejected": null,
+      "wall_s": 2.24,
+      "prompt_tokens": 129,
+      "gen_tokens": 13,
+      "tok_per_s": 11.66
+    },
+    {
+      "sentence": "This process takes place mainly in the leaves, inside tiny structures called chloroplasts.",
+      "answer": "chloroplasts",
+      "raw": "What tiny structures are found inside leaves and are responsible for photosynthesis?",
+      "answer_back": "Chloroplasts",
+      "rejected": null,
+      "wall_s": 2.32,
+      "prompt_tokens": 135,
+      "gen_tokens": 14,
+      "tok_per_s": 11.83
+    },
+    {
+      "sentence": "Chloroplasts contain a green pigment called chlorophyll, which absorbs energy from sunlight.",
+      "answer": "chlorophyll",
+      "raw": "What green pigment is found in chloroplasts and absorbs energy from sunlight?",
+      "answer_back": "Chlorophyll",
+      "rejected": null,
+      "wall_s": 2.61,
+      "prompt_tokens": 136,
+      "gen_tokens": 15,
+      "tok_per_s": 11.52
+    },
+    {
+      "summary_call": true,
+      "wall_s": 9.58,
+      "prompt_tokens": 242,
+      "gen_tokens": 74,
+      "tok_per_s": 10.51
+    }
+  ]
+}
